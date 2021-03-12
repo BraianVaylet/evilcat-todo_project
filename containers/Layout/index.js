@@ -5,7 +5,8 @@ import { useMediaQuery } from "@chakra-ui/media-query"
 // theme
 import { MY_BREAKPOINTS } from "styles/theme"
 // components
-import LayoutMenu from "components/organisms/LayoutMenu"
+import LayoutTemplate from "components/templates/LayoutTemplate"
+// hooks
 import useSetColorTheme from "hooks/useSetColorTheme"
 
 /**
@@ -32,8 +33,11 @@ const Layout = ({ children }) => {
         position="relative"
         bgColor={backgroundColor}
       >
-        <LayoutMenu />
-        {children}
+        <LayoutTemplate>
+          <Flex w="100%" mt="5rem">
+            {children}
+          </Flex>
+        </LayoutTemplate>
       </Flex>
     </Flex>
   )

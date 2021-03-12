@@ -3,16 +3,15 @@ import PropTypes from "prop-types"
 import { Flex, Text } from "@chakra-ui/layout"
 // styles
 import { LogoIcon } from "styles/icons"
-import { Button } from "@chakra-ui/button"
 
 /**
  * Logo Component
  * @component
  * @description Componente Logo con icono y texto
  */
-const Logo = ({ onClick, title }) => {
+const Logo = ({ title }) => {
   return (
-    <Flex as={Button} align="flex-start" onClick={onClick} variant="ghost">
+    <Flex align="flex-start">
       <LogoIcon fontSize="2rem" />
       <Text fontSize="1.5rem" fontWeight="bold" ml="1rem">
         {title}
@@ -22,7 +21,6 @@ const Logo = ({ onClick, title }) => {
 }
 
 Logo.propTypes = {
-  onClick: PropTypes.func,
   title: PropTypes.string,
 }
 

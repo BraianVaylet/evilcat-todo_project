@@ -1,12 +1,14 @@
 import PropTypes from "prop-types"
 // ui
-import { HamburgerIcon } from "@chakra-ui/icons"
 import { Flex } from "@chakra-ui/layout"
-import { IconButton } from "@chakra-ui/button"
 // component
 import Logo from "components/atoms/Logo"
 // utils/constants
 import { APP_TITLE } from "utils/constants"
+// hooks
+import useSetColorTheme from "hooks/useSetColorTheme"
+// next
+import Link from "next/link"
 
 /**
  * Navbar Component
@@ -14,16 +16,24 @@ import { APP_TITLE } from "utils/constants"
  * @description Componente Navbar con icono a menu y logo
  */
 const Navbar = ({ onClickLogo, onClickMenu, btnRef }) => {
+  const backgroundColor = useSetColorTheme("gray.900", "white")
+
   return (
-    <Flex w="100%" align="center" justify="space-between" p="1rem">
-      <Logo onClick={onClickLogo} title={APP_TITLE} />
-      <IconButton
-        ref={btnRef}
-        icon={<HamburgerIcon />}
-        fontSize="1.25rem"
-        onClick={onClickMenu}
-        variant="ghost"
-      />
+    <Flex
+      w="100%"
+      align="center"
+      justify="center"
+      p=".75rem"
+      position="absolute"
+      top="0"
+      bgColor={backgroundColor}
+      zIndex="1000"
+    >
+      <Link href="/">
+        <a>
+          <Logo onClick={onClickLogo} title={APP_TITLE} />
+        </a>
+      </Link>
     </Flex>
   )
 }

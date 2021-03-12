@@ -2,8 +2,9 @@ import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 // hooks
 import { useLocalStorage } from "hooks/useLocalStorage"
-// components
-import ButtonZoom from "components/atoms/ButtonZoom"
+// ui
+import { Flex, Text } from "@chakra-ui/layout"
+import { Button } from "@chakra-ui/button"
 
 /**
  * ChangeLanguageBtn Component
@@ -11,7 +12,6 @@ import ButtonZoom from "components/atoms/ButtonZoom"
  * @description Componente botón para cambiar el idioma Español-Inglés
  */
 const ChangeLanguageBtn = () => {
-  // hooks
   const [t, i18n] = useTranslation("global")
   const [storedValue, setLocalStorage] = useLocalStorage("language", null)
   const [spanish, setSpanish] = useState(storedValue === "es")
@@ -28,11 +28,22 @@ const ChangeLanguageBtn = () => {
   const handleLanguage = () => setSpanish(!spanish)
 
   return (
-    <ButtonZoom onClick={handleLanguage} fontSize="1rem">
-      {storedValue === "es"
-        ? t("ChangeLanguageBtn.en")
-        : t("ChangeLanguageBtn.es")}
-    </ButtonZoom>
+    <Button
+      as={Flex}
+      align="center"
+      justify="flex-start"
+      variant="none"
+      onClick={handleLanguage}
+      fontSize="1.5rem"
+      w="100%"
+    >
+      <Text>
+        {storedValue === "es"
+          ? t("ChangeLanguageBtn.en")
+          : t("ChangeLanguageBtn.es")}
+      </Text>
+      <Text ml="1rem">{t("ChangeLanguageBtn.title")}</Text>
+    </Button>
   )
 }
 

@@ -1,10 +1,7 @@
-// react
-import React from "react"
+import { useTranslation } from "react-i18next"
 // chakra-ui
-import { useColorMode } from "@chakra-ui/react"
+import { Box, Button, Flex, Text, useColorMode } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
-// components
-import IconButtonRotate from "components/atoms/IconButtonRotate"
 
 /**
  * ChangeThemeBtn Component
@@ -12,19 +9,28 @@ import IconButtonRotate from "components/atoms/IconButtonRotate"
  * @description Componente botón para cambiar el theme del proyecto Dark-Light
  */
 const ChangeThemeBtn = () => {
+  const [t] = useTranslation("global")
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <IconButtonRotate
+    <Button
+      as={Flex}
+      align="center"
+      justify="flex-start"
+      variant="none"
       onClick={toggleColorMode}
-      icon={
-        colorMode === "light" ? (
+      fontSize="1.5rem"
+      w="100%"
+    >
+      <Box>
+        {colorMode === "light" ? (
           <MoonIcon boxSize="1.5rem" />
         ) : (
           <SunIcon boxSize="1.5rem" />
-        )
-      }
-    />
+        )}
+      </Box>
+      <Text ml="1rem">{t("ChangeThemeBtn.title")}</Text>
+    </Button>
   )
 }
 

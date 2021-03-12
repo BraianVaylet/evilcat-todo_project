@@ -22,13 +22,16 @@ const CustomDrawer = ({
   header,
   body,
   footer,
+  direction,
+  size,
   ...props
 }) => {
   return (
     <Drawer
       {...props}
       isOpen={isOpen}
-      placement="right"
+      placement={direction}
+      size={size}
       onClose={onClose}
       finalFocusRef={btnRef}
     >
@@ -44,13 +47,20 @@ const CustomDrawer = ({
   )
 }
 
+CustomDrawer.defaultProps = {
+  direction: "bottom",
+  size: "full",
+}
+
 CustomDrawer.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  btnRef: PropTypes.any.isRequired,
+  btnRef: PropTypes.any,
   header: PropTypes.node,
   body: PropTypes.node,
   footer: PropTypes.node,
+  direction: PropTypes.oneOf(["right", "bottom", "left", "top"]),
+  size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl", "full"]),
 }
 
 export default CustomDrawer

@@ -14,12 +14,8 @@ export const TOOLTIP_TIME = 250
 
 // color palette
 export const COLORS = {
-  primary: "#2564f7",
-  secundary: "#67a9f0",
-  jacket: "orange.300",
-  shirt: "brand.primary",
-  shoes: "red.500",
-  accesories: "teal.400",
+  primary: "#E53E3E",
+  secundary: "red.200",
 }
 
 // my chakra theme
@@ -37,7 +33,7 @@ const theme = extendTheme({
         minHeight: "100vh",
         minWidth: "100wh",
         backgroundImage: `radial-gradient(${addOpacityToColor(
-          "#2564f7",
+          "#E53E3E",
           0.5
         )} 1px, transparent 1px)`,
         backgroundPosition: "0 0 25px 25px",
@@ -48,7 +44,7 @@ const theme = extendTheme({
         overflowX: "hidden !important",
       },
       a: {
-        color: props.colorMode === "dark" ? "blue.300" : "blue.500",
+        color: props.colorMode === "dark" ? "red.300" : "red.200",
       },
     }),
   },

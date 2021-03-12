@@ -13,7 +13,7 @@ import { ItemPropTypes } from "utils/propTypes"
 const Item = ({ item }) => {
   return (
     <Flex align="flex-start" justify="space-between" w="100%" p="1rem 2rem">
-      <Checkbox colorScheme="pink" size="lg" defaultIsChecked={item.check}>
+      <Checkbox colorScheme="red" size="lg" defaultIsChecked={item.check}>
         <Flex align="center" justify="flex-start" ml=".75rem" w="100%">
           <Flex w="12vw" align="center">
             <Badge fontSize="1.25rem">x{item.units}</Badge>

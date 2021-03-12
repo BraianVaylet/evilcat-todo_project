@@ -1,6 +1,10 @@
 {
   "ChangeLanguageBtn": {
 		"es": "ES",
-		"en": "EN"
+		"en": "EN",
+		"title": "Change language"
+	},
+	"ChangeThemeBtn": {
+		"title": "Change theme"
 	}
 }
