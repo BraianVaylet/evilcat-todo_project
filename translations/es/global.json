@@ -6,5 +6,9 @@
 	},
 	"ChangeThemeBtn": {
 		"title": "Cambiar tema"
+	},
+	"ItemForm": {
+		"title": "Nuevo Item",
+		"save": "Guardar"
 	}
 }

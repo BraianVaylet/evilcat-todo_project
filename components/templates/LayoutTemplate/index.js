@@ -1,7 +1,15 @@
+import { useContext } from "react"
 import PropTypes from "prop-types"
 // components
-import Footer from "components/molecules/Footer"
-import Navbar from "components/molecules/Navbar"
+import Navbar from "components/organisms/Navbar"
+import ItemForm from "components/organisms/ItemForm"
+import Footer from "components/organisms/Footer"
+// ui
+import { useDisclosure } from "@chakra-ui/hooks"
+// next
+import { useRouter } from "next/router"
+// context
+import { FormContext } from "context"
 
 /**
  * LayoutTemplate Component
@@ -9,11 +17,29 @@ import Navbar from "components/molecules/Navbar"
  * @description Componente LayoutTemplate con Navbar yoptimi Footer
  */
 const LayoutTemplate = ({ children }) => {
+  const { cleanContext } = useContext(FormContext)
+  const router = useRouter()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleClickAdd = () => {
+    cleanContext()
+    onOpen()
+  }
+
+  const handleClickSettings = () => router.push("/Config")
+
+  const handleClickRefresh = () => {}
+
   return (
     <>
       <Navbar />
       {children}
-      <Footer />
+      <Footer
+        onClickAdd={handleClickAdd}
+        onClickSettings={handleClickSettings}
+        onClickRefresh={handleClickRefresh}
+      />
+      <ItemForm isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

@@ -6,5 +6,9 @@
 	},
 	"ChangeThemeBtn": {
 		"title": "Change theme"
+	},
+	"ItemForm": {
+		"title": "New Item",
+		"save": "Save"
 	}
 }

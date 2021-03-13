@@ -24,6 +24,7 @@ const CustomDrawer = ({
   footer,
   direction,
   size,
+  withClose,
   ...props
 }) => {
   return (
@@ -37,7 +38,7 @@ const CustomDrawer = ({
     >
       <DrawerOverlay>
         <DrawerContent>
-          <DrawerCloseButton />
+          {withClose && <DrawerCloseButton />}
           <DrawerHeader>{header}</DrawerHeader>
           <DrawerBody>{body}</DrawerBody>
           <DrawerFooter>{footer}</DrawerFooter>
@@ -50,6 +51,7 @@ const CustomDrawer = ({
 CustomDrawer.defaultProps = {
   direction: "bottom",
   size: "full",
+  withClose: true,
 }
 
 CustomDrawer.propTypes = {
@@ -61,6 +63,7 @@ CustomDrawer.propTypes = {
   footer: PropTypes.node,
   direction: PropTypes.oneOf(["right", "bottom", "left", "top"]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg", "xl", "full"]),
+  withClose: PropTypes.bool,
 }
 
 export default CustomDrawer

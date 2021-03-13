@@ -15,14 +15,14 @@ import { ItemPropTypes } from "utils/propTypes"
 const ItemsList = ({ items }) => {
   const [itemsCheck, setItemsCheck] = useState([])
   const [itemsCheckFalse, setItemsCheckFalse] = useState([])
+
   useEffect(() => {
-    const check = items.filter((item) => item.check === true)
-    const checkFalse = items.filter((item) => item.check === false)
-    console.log("check", check)
-    console.log("checkFalse", checkFalse)
-    setItemsCheck(check)
-    setItemsCheckFalse(checkFalse)
+    setItemsCheck(handleFilterItems(true))
+    setItemsCheckFalse(handleFilterItems(false))
   }, [items])
+
+  const handleFilterItems = (status) =>
+    items.filter((item) => item.check === status)
 
   return (
     <Flex direction="column" align="center" justify="flex-start" w="100%">
