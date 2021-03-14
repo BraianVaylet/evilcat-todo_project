@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import PropTypes from "prop-types"
 // components
 import Navbar from "components/organisms/Navbar"
@@ -10,6 +10,8 @@ import { useDisclosure } from "@chakra-ui/hooks"
 import { useRouter } from "next/router"
 // context
 import { FormContext } from "context"
+// hooks
+import useUser from "hooks/useUser"
 
 /**
  * LayoutTemplate Component
@@ -18,8 +20,11 @@ import { FormContext } from "context"
  */
 const LayoutTemplate = ({ children }) => {
   const { cleanContext } = useContext(FormContext)
+  const user = useUser()
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => !user && router.replace("/"), [user])
 
   const handleClickAdd = () => {
     cleanContext()
@@ -30,7 +35,7 @@ const LayoutTemplate = ({ children }) => {
 
   const handleClickRefresh = () => {}
 
-  return (
+  return user ? (
     <>
       <Navbar />
       {children}
@@ -41,6 +46,8 @@ const LayoutTemplate = ({ children }) => {
       />
       <ItemForm isOpen={isOpen} onClose={onClose} />
     </>
+  ) : (
+    children
   )
 }
 

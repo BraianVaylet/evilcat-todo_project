@@ -9,10 +9,10 @@ import { LogoIcon } from "styles/icons"
  * @component
  * @description Componente Logo con icono y texto
  */
-const Logo = ({ title }) => {
+const Logo = ({ title, iconSize }) => {
   return (
     <Flex align="flex-start">
-      <LogoIcon fontSize="2rem" />
+      <LogoIcon fontSize={iconSize} />
       <Text fontSize="1.5rem" fontWeight="bold" ml="1rem">
         {title}
       </Text>
@@ -20,8 +20,13 @@ const Logo = ({ title }) => {
   )
 }
 
+Logo.defaultProps = {
+  iconSize: "2rem",
+}
+
 Logo.propTypes = {
   title: PropTypes.string,
+  iconSize: PropTypes.string,
 }
 
 export default Logo

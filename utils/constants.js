@@ -1,1 +1,1 @@
-export const APP_TITLE = "EvilCat ToDo"
+export const APP_TITLE = "EvilCat"

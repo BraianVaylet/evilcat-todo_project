@@ -26,11 +26,11 @@ const ItemsList = ({ items }) => {
 
   return (
     <Flex direction="column" align="center" justify="flex-start" w="100%">
-      {itemsCheck.map((item) => (
+      {itemsCheckFalse.map((item) => (
         <Item key={item.id} item={item} />
       ))}
       <Divider />
-      {itemsCheckFalse.map((item) => (
+      {itemsCheck.map((item) => (
         <Item key={item.id} item={item} />
       ))}
     </Flex>

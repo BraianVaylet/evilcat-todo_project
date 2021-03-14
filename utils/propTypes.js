@@ -7,3 +7,10 @@ export const ItemPropTypes = {
   check: PropTypes.bool,
   price: PropTypes.number,
 }
+
+export const userPropTypes = {
+  avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  uid: PropTypes.string.isRequired,
+}

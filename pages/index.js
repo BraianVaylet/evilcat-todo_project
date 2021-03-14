@@ -1,57 +1,35 @@
+import { useEffect } from "react"
 // ui
-import { Flex } from "@chakra-ui/layout"
+import { Flex, Text } from "@chakra-ui/layout"
+import LoginGoogle from "components/atoms/LoginGoogle"
 // components
-import ItemsList from "components/organisms/ItemsList"
+import Logo from "components/atoms/Logo"
+import useUser from "hooks/useUser"
+// utils/constants
+import { APP_TITLE } from "utils/constants"
+// next
+import { useRouter } from "next/router"
 
-export default function Home() {
-  const items = [
-    {
-      id: "1",
-      title: "Producto 1",
-      units: 2,
-      check: true,
-      price: 0,
-    },
-    {
-      id: "2",
-      title: "Producto 2",
-      units: 22,
-      check: true,
-      price: 0,
-    },
-    {
-      id: "3",
-      title: "Producto 3",
-      units: 1,
-      check: false,
-      price: 0,
-    },
-    {
-      id: "4",
-      title: "Producto 4",
-      units: 2,
-      check: false,
-      price: 0,
-    },
-    {
-      id: "5",
-      title: "Producto 5",
-      units: 2,
-      check: false,
-      price: 0,
-    },
-    {
-      id: "6",
-      title: "Producto 6",
-      units: 12,
-      check: false,
-      price: 0,
-    },
-  ]
+export default function Login() {
+  const user = useUser()
+  const router = useRouter()
+
+  useEffect(() => user && router.push("/Home"), [user])
 
   return (
-    <Flex w="100%">
-      <ItemsList items={items} />
+    <Flex
+      w="100%"
+      align="center"
+      justify="space-around"
+      direction="column"
+      h="100%"
+      minH="75vh"
+    >
+      <Flex w="100%" align="center" justify="center" direction="column">
+        <Logo iconSize="10rem" />
+        <Text fontSize="5rem">{APP_TITLE}</Text>
+      </Flex>
+      <LoginGoogle fontSize="3rem" />
     </Flex>
   )
 }

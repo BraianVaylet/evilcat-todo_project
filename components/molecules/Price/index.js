@@ -49,7 +49,6 @@ const Price = () => {
         max={1000}
         step={10}
         focusThumbOnChange={false}
-        colorScheme="pink"
         defaultValue={0}
         value={price}
         onChange={handleChange}

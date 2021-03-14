@@ -1,5 +1,5 @@
 // components
-import ConfigTemplate from "components/templates/ConfigTemplate"
+import SettingsTemplate from "components/templates/SettingsTemplate"
 
 /**
  * Config Page
@@ -7,6 +7,6 @@ import ConfigTemplate from "components/templates/ConfigTemplate"
  * @description Componente page Config
  */
 const Config = () => {
-  return <ConfigTemplate />
+  return <SettingsTemplate />
 }
 export default Config

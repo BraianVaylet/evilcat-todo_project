@@ -9,6 +9,14 @@
 	},
 	"ItemForm": {
 		"title": "New Item",
-		"save": "Save"
+		"save": "Save",
+		"success": "👍 New Item Success",
+		"error": "👎 New Item Error"
+	},
+	"LoginGoogle": {
+		"title": "Continue"
+	},
+	"SettingsTemplate": {
+		"logout": "Logout"
 	}
 }

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 // ui
@@ -6,32 +6,84 @@ import { Button } from "@chakra-ui/button"
 import { Flex, Text } from "@chakra-ui/layout"
 import { CloseIcon } from "@chakra-ui/icons"
 import { Input } from "@chakra-ui/input"
+import { useToast } from "@chakra-ui/toast"
 // components
 import CustomDrawer from "components/atoms/CustomDrawer"
 import Counter from "components/molecules/Counter"
 import Price from "components/molecules/Price"
 // context
 import { FormContext } from "context"
+import { ItemPropTypes } from "utils/propTypes"
+// firebase
+import { FirebaseClient } from "firebase/client"
 
 /**
  * ItemForm Container
  * @component
  * @description Componente ItemForm, Formulario de alta/edicion de items
  */
-const ItemForm = ({ isOpen, onClose }) => {
+const ItemForm = ({ isOpen, onClose, item, withEditAction }) => {
+  const firebase = new FirebaseClient()
   const [t] = useTranslation("global")
+  const toast = useToast()
+  const { count, setCount, price, setPrice, cleanContext } = useContext(
+    FormContext
+  )
   const [value, setValue] = useState("")
-  const { count } = useContext(FormContext)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (withEditAction) {
+      setValue(item.title)
+      setPrice(item.price)
+      setCount(item.units)
+    }
+  }, [withEditAction, item])
 
   const handleChangeInput = (e) => setValue(e.target.value)
 
+  const handleCleanForm = () => {
+    setValue("")
+    cleanContext()
+    setError(null)
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    console.log("count", count)
     if (value !== "") {
-      // guardo
+      const item = {
+        title: value,
+        units: count,
+        price: price,
+        check: false,
+      }
+      firebase
+        .addItems(item)
+        .then(() => {
+          toast({
+            title: t("ItemForm.success"),
+            description: "",
+            status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+          handleCleanForm()
+          onClose()
+        })
+        .catch((error) => {
+          console.log(`error`, error)
+          toast({
+            title: t("ItemForm.error"),
+            description: "",
+            status: "error",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+        })
     } else {
-      // otra cosa
+      value === "" && setError("Ingrese un titulo al item")
     }
   }
 
@@ -69,13 +121,28 @@ const ItemForm = ({ isOpen, onClose }) => {
                 variant="filled"
                 autoFocus={true}
                 mb="2rem"
+                isInvalid={error}
+                errorBorderColor="tomato"
               />
               <Price />
             </Flex>
             <Counter />
-            <Button type="submit" w="100%" mb="3rem" p="1rem">
-              <Text fontSize="2rem">{t("ItemForm.save")}</Text>
-            </Button>
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              w="100%"
+              mb="3rem"
+            >
+              <Button type="submit" w="100%" p="1rem">
+                <Text fontSize="2rem">{t("ItemForm.save")}</Text>
+              </Button>
+              {error && (
+                <Text color="tomato" fontSize="1rem" mt=".5rem">
+                  {error}
+                </Text>
+              )}
+            </Flex>
           </Flex>
         </form>
       }
@@ -91,8 +158,14 @@ const ItemForm = ({ isOpen, onClose }) => {
 }
 
 ItemForm.propTypes = {
+  withEditAction: false,
+}
+
+ItemForm.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  item: PropTypes.shape(ItemPropTypes),
+  withEditAction: PropTypes.bool,
 }
 
 export default ItemForm
