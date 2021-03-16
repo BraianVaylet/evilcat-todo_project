@@ -13,9 +13,9 @@ import Counter from "components/molecules/Counter"
 import Price from "components/molecules/Price"
 // context
 import { FormContext } from "context"
+import { FirebaseContext } from "context/FirebaseContext"
+// utils/proptypes
 import { ItemPropTypes } from "utils/propTypes"
-// firebase
-import { FirebaseClient } from "firebase/client"
 
 /**
  * ItemForm Container
@@ -23,9 +23,9 @@ import { FirebaseClient } from "firebase/client"
  * @description Componente ItemForm, Formulario de alta/edicion de items
  */
 const ItemForm = ({ isOpen, onClose, item, withEditAction }) => {
-  const firebase = new FirebaseClient()
   const [t] = useTranslation("global")
   const toast = useToast()
+  const { handleAddItem, handleEditItem } = useContext(FirebaseContext)
   const { count, setCount, price, setPrice, cleanContext } = useContext(
     FormContext
   )
@@ -48,17 +48,18 @@ const ItemForm = ({ isOpen, onClose, item, withEditAction }) => {
     setError(null)
   }
 
+  const handleAction = (item) =>
+    withEditAction ? handleEditItem(item) : handleAddItem(item)
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
     if (value !== "") {
-      const item = {
-        title: value,
-        units: count,
-        price: price,
-        check: false,
-      }
-      firebase
-        .addItems(item)
+      const _item = item || {}
+      _item.title = value.toString()
+      _item.units = parseInt(count)
+      _item.price = parseInt(price)
+
+      handleAction(_item)
         .then(() => {
           toast({
             title: t("ItemForm.success"),

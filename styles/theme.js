@@ -3,10 +3,7 @@ import { addOpacityToColor } from "./utils"
 
 // my own breakpoints
 export const MY_BREAKPOINTS = {
-  BREAK_MIN: {
-    tag: "(min-width: 600px)",
-    value: "600px",
-  },
+  BREAK_MIN: "500px",
 }
 
 // tooltip time

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 // ui
-import { Divider, Flex } from "@chakra-ui/layout"
+import { Divider } from "@chakra-ui/layout"
 // components
 import Item from "components/molecules/Item"
 // utils
 import { ItemPropTypes } from "utils/propTypes"
+import { Accordion } from "@chakra-ui/accordion"
 
 /**
  * ItemsList Component
@@ -25,15 +26,15 @@ const ItemsList = ({ items }) => {
     items.filter((item) => item.check === status)
 
   return (
-    <Flex direction="column" align="center" justify="flex-start" w="100%">
+    <Accordion defaultIndex={[0]} allowMultiple w="100%">
       {itemsCheckFalse.map((item) => (
         <Item key={item.id} item={item} />
       ))}
-      <Divider />
+      <Divider m="2rem 0" />
       {itemsCheck.map((item) => (
         <Item key={item.id} item={item} />
       ))}
-    </Flex>
+    </Accordion>
   )
 }
 

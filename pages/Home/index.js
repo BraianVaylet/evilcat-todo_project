@@ -1,57 +1,20 @@
-// ui
-import { Flex } from "@chakra-ui/layout"
 // components
-import ItemsList from "components/organisms/ItemsList"
+import HomeTemplate from "components/templates/HomeTemplate"
+// next
+import Head from "next/head"
 
+/**
+ * Home Page
+ * @component
+ * @description Componente page Home
+ */
 export default function Home() {
-  const items = [
-    {
-      id: "1",
-      title: "Producto 1",
-      units: 2,
-      check: true,
-      price: 0,
-    },
-    {
-      id: "2",
-      title: "Producto 2",
-      units: 22,
-      check: true,
-      price: 0,
-    },
-    {
-      id: "3",
-      title: "Producto 3",
-      units: 1,
-      check: false,
-      price: 10,
-    },
-    {
-      id: "4",
-      title: "Producto 4",
-      units: 2,
-      check: false,
-      price: 40,
-    },
-    {
-      id: "5",
-      title: "Producto 5",
-      units: 2,
-      check: false,
-      price: 30,
-    },
-    {
-      id: "6",
-      title: "Producto 6",
-      units: 12,
-      check: false,
-      price: 100,
-    },
-  ]
-
   return (
-    <Flex w="100%">
-      <ItemsList items={items} />
-    </Flex>
+    <>
+      <Head>
+        <title>Inicio / EvilCat</title>
+      </Head>
+      <HomeTemplate />
+    </>
   )
 }

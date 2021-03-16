@@ -108,9 +108,76 @@ export class FirebaseClient {
       title,
       units,
       price,
-      check,
+      check: false,
       isActive: true,
       createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+      updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
     })
+  }
+
+  // * EDIT FUNC
+  /**
+   * editItems
+   * @param {object} Item
+   * @returns {Promise<object>}
+   * @description [Firebase] Agrego un nuevo item a la base de datos
+   */
+  editItems({ id, title, units, price, check, isActive }) {
+    return db
+      .collection("items")
+      .doc(id)
+      .update({
+        title,
+        units,
+        price,
+        check: check || false,
+        isActive: isActive || true,
+        updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
+      })
+  }
+
+  // * GET FUNC
+  /**
+   * getAllItems
+   * @returns {Promise<object>}
+   * @description [Firebase] obtengo todos los items
+   */
+  async getAllItems() {
+    try {
+      const doc = await db.collection("items").orderBy("createdAt", "asc").get()
+      return doc.docs.map(this.mapItemFromFirebaseToItem)
+    } catch (error) {
+      console.log(`error`, error)
+    }
+  }
+
+  /**
+   * getAllItemsInRealTime
+   * @returns {Promise<object>}
+   * @description [Firebase] obtengo todos los items en tiempo real
+   */
+  getAllItemsInRealTime(callback) {
+    return db
+      .collection("items")
+      .orderBy("createdAt", "desc")
+      .onSnapshot(({ docs }) => {
+        const newItems = docs.map(this.mapItemFromFirebaseToItem)
+        callback(newItems)
+      })
+  }
+
+  // * DELETE FUNC
+  /**
+   * deleteItemByID
+   * @param {string} id
+   * @returns {Promise}
+   * @description [Firebase] Elimino un producto de la bd por id
+   */
+  async deleteItemByID(id) {
+    try {
+      return await db.collection("items").doc(id).delete()
+    } catch (error) {
+      console.error("error", error)
+    }
   }
 }

@@ -18,5 +18,12 @@
 	},
 	"SettingsTemplate": {
 		"logout": "Cerrar sesión"
+	},
+	"Item": {
+		"deleteItem": "Eliminar item",
+		"questionDeleteItem": "Seguro que quiere eliminar este item?",
+		"cancel": "Cancelar",
+		"delete": "Eliminar",
+		"deleted": "Eliminado"
 	}
 }

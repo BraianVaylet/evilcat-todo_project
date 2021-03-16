@@ -1,5 +1,7 @@
 // components
 import SettingsTemplate from "components/templates/SettingsTemplate"
+// next
+import Head from "next/head"
 
 /**
  * Config Page
@@ -7,6 +9,13 @@ import SettingsTemplate from "components/templates/SettingsTemplate"
  * @description Componente page Config
  */
 const Config = () => {
-  return <SettingsTemplate />
+  return (
+    <>
+      <Head>
+        <title>Settings / EvilCat</title>
+      </Head>
+      <SettingsTemplate />
+    </>
+  )
 }
 export default Config

@@ -1,7 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 // context
-import { FormContextProvider } from "context"
+import {
+  FirebaseContextProvider,
+  FormContextProvider,
+  ItemsContextProvider,
+} from "context"
 
 /**
  * WrapperContext Container
@@ -9,7 +13,15 @@ import { FormContextProvider } from "context"
  * @description Contenedor del Context del proyecto
  */
 const WrapperContext = ({ children }) => {
-  return <FormContextProvider>{children}</FormContextProvider>
+  return (
+    <FormContextProvider>
+      <ItemsContextProvider>
+        <FirebaseContextProvider>
+          <>{children}</>
+        </FirebaseContextProvider>
+      </ItemsContextProvider>
+    </FormContextProvider>
+  )
 }
 
 WrapperContext.propTypes = {

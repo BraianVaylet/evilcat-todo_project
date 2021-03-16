@@ -15,14 +15,15 @@ import useSetColorTheme from "hooks/useSetColorTheme"
  * @description Contenedor Principal de la App
  */
 const Layout = ({ children }) => {
-  const [mediaQuery] = useMediaQuery(MY_BREAKPOINTS.BREAK_MIN.tag)
+  const [mediaQuery] = useMediaQuery(`(min-width: ${MY_BREAKPOINTS.BREAK_MIN})`)
   const backgroundColor = useSetColorTheme("gray.900", "white")
 
   return (
     <Flex display="grid" height="100vh" placeItems="center">
       <Flex
+        className="Layout"
         height={mediaQuery ? "90vh" : "100%"}
-        width={mediaQuery ? MY_BREAKPOINTS.BREAK_MIN.value : "100%"}
+        width={mediaQuery ? MY_BREAKPOINTS.BREAK_MIN : "100%"}
         borderRadius="10px"
         boxShadow="lg"
         direction="column"
