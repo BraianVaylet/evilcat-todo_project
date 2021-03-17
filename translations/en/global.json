@@ -1,0 +1,33 @@
+{
+  "ChangeLanguageBtn": {
+		"es": "ES",
+		"en": "EN",
+		"title": "Change language"
+	},
+	"ChangeThemeBtn": {
+		"title": "Change theme"
+	},
+	"ItemForm": {
+		"title": "New Item",
+		"save": "Save",
+		"success": "👍 New Item Success",
+		"error": "👎 New Item Error"
+	},
+	"LoginGoogle": {
+		"title": "Continue"
+	},
+	"SettingsTemplate": {
+		"logout": "Logout"
+	},
+	"Item": {
+		"deleteItem": "Delete Item",
+		"questionDeleteItem": "Are you sure to delete this item?",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"deleted": "Item deleted",
+		"inactiveItem": "Delete Item",
+		"questionInactiveItem": "Are you sure to remove this item?",
+		"remove": "Remove",
+		"removed": "Item removed"
+	}
+}

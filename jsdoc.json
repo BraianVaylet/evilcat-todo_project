@@ -1,0 +1,45 @@
+{
+  "source": {
+    "include": ["."],
+    "includePattern": "\\.(jsx|js)$",
+    "excludePattern": "(node_modules|docs)"
+  },
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "plugins": [
+    "plugins/markdown",
+    "better-docs/component",
+    "better-docs/category"
+  ],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true,
+    "better-docs": {
+      "name": "EvilCat",
+      "navigation": [
+          {
+              "label": "GitHub",
+              "href": ""
+          }
+      ]
+    },
+    "search": true,
+    "default": {
+      "staticFiles": {
+        "include": [
+            "./docs-src"
+        ]
+      }
+    }
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "./docs",
+    "recurse": true,
+    "verbose": true,
+    "readme": "./readme.md",
+    "template": "node_modules/better-docs",
+    "tutorials": "./docs-tutorials"
+  }
+}
