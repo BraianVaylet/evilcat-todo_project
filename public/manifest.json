@@ -1,10 +1,11 @@
 {
     "theme_color": "#000000",
-    "background_color": "#000000",
+    "background_color": "#ffffff",
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/https://evilcat.vercel.app",
     "name": "EvilCat",
+    "orientation": "portrait",
     "short_name": "EvilCat",
     "description": "App ToDo in NextJs",
     "icons": [
