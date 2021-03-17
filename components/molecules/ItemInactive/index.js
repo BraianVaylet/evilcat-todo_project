@@ -2,18 +2,17 @@ import { useContext } from "react"
 import { useTranslation } from "react-i18next"
 import PropTypes from "prop-types"
 // ui
-import { CloseIcon, EditIcon } from "@chakra-ui/icons"
-import { Checkbox } from "@chakra-ui/checkbox"
+import { DeleteIcon, EditIcon, TriangleUpIcon } from "@chakra-ui/icons"
 import { Badge, Flex, Text } from "@chakra-ui/layout"
 import { Button, IconButton } from "@chakra-ui/button"
 import { useDisclosure } from "@chakra-ui/hooks"
+import { useToast } from "@chakra-ui/toast"
 import {
   AccordionButton,
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
 } from "@chakra-ui/accordion"
-import { useToast } from "@chakra-ui/toast"
 // utils
 import { ItemPropTypes } from "utils/propTypes"
 // components
@@ -21,66 +20,56 @@ import ItemForm from "components/organisms/ItemForm"
 import CustomDrawer from "components/atoms/CustomDrawer"
 // context
 import { FirebaseContext } from "context"
+import useSetColorTheme from "hooks/useSetColorTheme"
 
 /**
  * Item Component
  * @component
  * @description Componente Item
  */
-const Item = ({ item }) => {
+const ItemInactive = ({ item }) => {
   const [t] = useTranslation("global")
+  const background = useSetColorTheme("gray.700", "gray.200")
   const toast = useToast()
-  const { handleEditItem, handleIsActiveItem } = useContext(FirebaseContext)
+  const { handleDeleteItem, handleIsActiveItem } = useContext(FirebaseContext)
   const EditCustomDrawer = useDisclosure()
-  const IsActiveFalseCustomDrawer = useDisclosure()
+  const DeleteCustomDrawer = useDisclosure()
 
-  const handleClickCkeck = (e) => {
-    const newItem = item
-    newItem.check = e.target.checked
-    handleEditItem(newItem).catch((error) => console.log(`error`, error))
-  }
+  const handleClickActive = () =>
+    handleIsActiveItem(item, true).catch((error) => console.log(`error`, error))
 
-  const handleClickInactive = () =>
-    handleIsActiveItem(item, false)
+  const handleClickDelete = () =>
+    handleDeleteItem(item.id)
       .then(() => {
         toast({
-          title: t("Item.removed"),
+          title: t("Item.deleted"),
           description: "",
           status: "success",
           position: "top",
           duration: 2000,
           isClosable: true,
         })
-        IsActiveFalseCustomDrawer.onClose()
+        DeleteCustomDrawer.onClose()
       })
       .catch((error) => console.log(`error`, error))
 
   return (
     <>
-      <AccordionItem w="100%">
+      <AccordionItem w="100%" bg={background}>
         <AccordionButton w="100%">
           <Flex align="center" justify="space-between" w="100%">
-            <Checkbox
-              size="lg"
+            <IconButton
               w="1rem"
               mr="1rem"
-              defaultIsChecked={item.check}
-              onChange={handleClickCkeck}
+              icon={<TriangleUpIcon />}
+              onClick={handleClickActive}
             />
             <Flex align="center" justify="flex-start" ml=".75rem" w="100%">
               <Flex align="center" justify="flex-start">
-                <Badge
-                  fontSize="1.25rem"
-                  color={item.check ? "gray.400" : undefined}
-                >
+                <Badge fontSize="1.25rem" color="gray.400">
                   x{item.units}
                 </Badge>
-                <Text
-                  fontSize="1.5rem"
-                  ml="1rem"
-                  textDecoration={item.check ? "line-through" : undefined}
-                  color={item.check ? "gray.400" : undefined}
-                >
+                <Text fontSize="1.5rem" ml="1rem" color="gray.400">
                   {item.title}
                 </Text>
               </Flex>
@@ -108,8 +97,8 @@ const Item = ({ item }) => {
             <IconButton
               ml="2rem"
               variant="ghost"
-              icon={<CloseIcon />}
-              onClick={IsActiveFalseCustomDrawer.onOpen}
+              icon={<DeleteIcon />}
+              onClick={DeleteCustomDrawer.onOpen}
             />
           </Flex>
         </AccordionPanel>
@@ -125,17 +114,17 @@ const Item = ({ item }) => {
       <CustomDrawer
         direction="top"
         size="md"
-        isOpen={IsActiveFalseCustomDrawer.isOpen}
-        onClose={IsActiveFalseCustomDrawer.onClose}
-        header={<Text>{t("Item.inactiveItem")}</Text>}
-        body={<Text>{t("Item.questionInactiveItem")}</Text>}
+        isOpen={DeleteCustomDrawer.isOpen}
+        onClose={DeleteCustomDrawer.onClose}
+        header={<Text>{t("Item.deleteItem")}</Text>}
+        body={<Text>{t("Item.questionDeleteItem")}</Text>}
         footer={
           <Flex>
-            <Button ml="1rem" onClick={IsActiveFalseCustomDrawer.onClose}>
+            <Button ml="1rem" onClick={DeleteCustomDrawer.onClose}>
               {t("Item.cancel")}
             </Button>
-            <Button ml="1rem" onClick={handleClickInactive}>
-              {t("Item.remove")}
+            <Button ml="1rem" onClick={handleClickDelete}>
+              {t("Item.delete")}
             </Button>
           </Flex>
         }
@@ -144,7 +133,7 @@ const Item = ({ item }) => {
   )
 }
 
-Item.defaultProps = {
+ItemInactive.defaultProps = {
   item: {
     id: "0",
     title: "",
@@ -154,8 +143,8 @@ Item.defaultProps = {
   },
 }
 
-Item.propTypes = {
+ItemInactive.propTypes = {
   item: PropTypes.shape(ItemPropTypes),
 }
 
-export default Item
+export default ItemInactive

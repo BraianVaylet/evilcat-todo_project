@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "doc": "jsdoc -c jsdoc.json",
+    "prettier": "prettier --write .",
+    "eslint": "eslint --fix .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.6",

@@ -20,10 +20,14 @@
 		"logout": "Logout"
 	},
 	"Item": {
-		"deleteItem": "Remove Item",
-		"questionDeleteItem": "Are you sure to remove this article?",
+		"deleteItem": "Delete Item",
+		"questionDeleteItem": "Are you sure to delete this item?",
 		"cancel": "Cancel",
 		"delete": "Delete",
-		"deleted": "Deleted"
+		"deleted": "Item deleted",
+		"inactiveItem": "Delete Item",
+		"questionInactiveItem": "Are you sure to remove this item?",
+		"remove": "Remove",
+		"removed": "Item removed"
 	}
 }

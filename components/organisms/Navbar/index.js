@@ -1,3 +1,4 @@
+import { useContext } from "react"
 import PropTypes from "prop-types"
 // ui
 import { Flex, Text } from "@chakra-ui/layout"
@@ -9,6 +10,8 @@ import { APP_TITLE } from "utils/constants"
 import useSetColorTheme from "hooks/useSetColorTheme"
 // next
 import Link from "next/link"
+// context
+import { ItemsContext } from "context"
 
 /**
  * Navbar Component
@@ -17,6 +20,19 @@ import Link from "next/link"
  */
 const Navbar = ({ onClickLogo }) => {
   const backgroundColor = useSetColorTheme("gray.900", "white")
+  const { itemsIsActiveTrue } = useContext(ItemsContext)
+
+  const handleTotalPrice = () => {
+    const initialValue = 0
+    return (
+      itemsIsActiveTrue &&
+      itemsIsActiveTrue.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.price * currentValue.units,
+        initialValue
+      )
+    )
+  }
 
   return (
     <Flex
@@ -35,7 +51,7 @@ const Navbar = ({ onClickLogo }) => {
         </a>
       </Link>
       <Text fontSize="1.5rem" fontWeight="900">
-        $4500
+        ${handleTotalPrice()}
       </Text>
     </Flex>
   )

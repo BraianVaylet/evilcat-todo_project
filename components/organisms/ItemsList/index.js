@@ -1,45 +1,41 @@
-import { useEffect, useState } from "react"
-import PropTypes from "prop-types"
+import { useContext } from "react"
 // ui
-import { Divider } from "@chakra-ui/layout"
+import { Divider, Text } from "@chakra-ui/layout"
+import { Accordion } from "@chakra-ui/accordion"
 // components
 import Item from "components/molecules/Item"
-// utils
-import { ItemPropTypes } from "utils/propTypes"
-import { Accordion } from "@chakra-ui/accordion"
+import ItemInactive from "components/molecules/ItemInactive"
+// context
+import { ItemsContext } from "context"
 
 /**
  * ItemsList Component
  * @component
  * @description Componente ItemsList. Listado de Items
  */
-const ItemsList = ({ items }) => {
-  const [itemsCheck, setItemsCheck] = useState([])
-  const [itemsCheckFalse, setItemsCheckFalse] = useState([])
-
-  useEffect(() => {
-    setItemsCheck(handleFilterItems(true))
-    setItemsCheckFalse(handleFilterItems(false))
-  }, [items])
-
-  const handleFilterItems = (status) =>
-    items.filter((item) => item.check === status)
+const ItemsList = () => {
+  const { itemsCheckTrue, itemsCheckFalse, itemsIsActiveFalse } = useContext(
+    ItemsContext
+  )
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple w="100%">
+    <Accordion allowToggle w="100%">
       {itemsCheckFalse.map((item) => (
         <Item key={item.id} item={item} />
       ))}
-      <Divider m="2rem 0" />
-      {itemsCheck.map((item) => (
+      <Divider m="4rem 0" size="2rem" colorScheme="blue" />
+      {itemsCheckTrue.map((item) => (
         <Item key={item.id} item={item} />
+      ))}
+      <Divider m="4rem 0" size="2rem" colorScheme="blue" />
+      <Text fontSize="1.2rem" p=".5rem" color="gray.400">
+        Inactivos
+      </Text>
+      {itemsIsActiveFalse.map((item) => (
+        <ItemInactive key={item.id} item={item} />
       ))}
     </Accordion>
   )
-}
-
-ItemsList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(ItemPropTypes)),
 }
 
 export default ItemsList

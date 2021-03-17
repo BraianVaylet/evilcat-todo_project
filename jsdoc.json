@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["src"],
+    "include": ["."],
     "includePattern": "\\.(jsx|js)$",
     "excludePattern": "(node_modules|docs)"
   },
@@ -16,11 +16,11 @@
     "cleverLinks": true,
     "monospaceLinks": true,
     "better-docs": {
-      "name": "🔻 ScarletToDo",
+      "name": "EvilCat",
       "navigation": [
           {
               "label": "GitHub",
-              "href": "https://github.com/BraianVaylet/coderhouse-react11360-bdv"
+              "href": ""
           }
       ]
     },

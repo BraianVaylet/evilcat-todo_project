@@ -12,6 +12,10 @@ export const FirebaseContextProvider = ({ children }) => {
   const handleGetAllItems = async () => await firebase.getAllItems()
   const handleDeleteItem = async (id) => await firebase.deleteItemByID(id)
   const handleEditItem = async (item) => await firebase.editItems(item)
+  const handleIsActiveItem = async (item, isActive) => {
+    const _item = { ...item, isActive, check: false }
+    await firebase.editItems(_item)
+  }
   const handleGetAllItemsRealTime = async (callback) =>
     await firebase.getAllItemsInRealTime(callback)
 
@@ -23,6 +27,7 @@ export const FirebaseContextProvider = ({ children }) => {
         handleEditItem,
         handleDeleteItem,
         handleGetAllItemsRealTime,
+        handleIsActiveItem,
       }}
     >
       {children}

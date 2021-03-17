@@ -123,6 +123,7 @@ export class FirebaseClient {
    * @description [Firebase] Agrego un nuevo item a la base de datos
    */
   editItems({ id, title, units, price, check, isActive }) {
+    console.log(`isActive`, isActive)
     return db
       .collection("items")
       .doc(id)
@@ -130,8 +131,8 @@ export class FirebaseClient {
         title,
         units,
         price,
-        check: check || false,
-        isActive: isActive || true,
+        check,
+        isActive,
         updatedAt: firebase.firestore.Timestamp.fromDate(new Date()),
       })
   }
