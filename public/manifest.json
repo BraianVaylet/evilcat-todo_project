@@ -3,7 +3,7 @@
     "background_color": "#ffffff",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/https://evilcat.vercel.app",
+    "start_url": "https://evilcat-hs89ll0r9-braianvaylet.vercel.app/",
     "name": "EvilCat",
     "orientation": "portrait",
     "short_name": "EvilCat",

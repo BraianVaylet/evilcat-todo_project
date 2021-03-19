@@ -30,7 +30,6 @@ export default function HomePage() {
     <>
       <Head>
         <title>Login | EvilCat</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex
         w="100%"
