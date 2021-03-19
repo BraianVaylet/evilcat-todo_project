@@ -24,7 +24,6 @@ const theme = extendTheme({
     global: (props) => ({
       "html, body": {
         fontSize: "1.5vh",
-        fontFamily: "Fira Sans Condensed, sansSerif",
         color: props.colorMode === "dark" ? "white" : "gray.600",
         lineHeight: "tall",
         scrollBehavior: "smooth",
