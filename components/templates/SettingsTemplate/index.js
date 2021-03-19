@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 // ui
 import { Button } from "@chakra-ui/button"
@@ -9,10 +8,6 @@ import ChangeThemeBtn from "components/molecules/ChangeThemeBtn"
 import CustomAvatar from "components/molecules/CustomAvatar"
 // firebase
 import { FirebaseClient } from "firebase/client"
-// hooks
-import useUser from "hooks/useUser"
-// next
-import { useRouter } from "next/router"
 
 /**
  * SettingsTemplate Component
@@ -21,13 +16,7 @@ import { useRouter } from "next/router"
  */
 const SettingsTemplate = () => {
   const [t] = useTranslation("global")
-  const user = useUser()
-  const router = useRouter()
   const firebase = new FirebaseClient()
-
-  useEffect(() => {
-    user === null && router.replace("/Login")
-  }, [user])
 
   const handleLogout = () => firebase.onAuthSignOut()
 

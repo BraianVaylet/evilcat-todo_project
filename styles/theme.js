@@ -28,7 +28,9 @@ const theme = extendTheme({
         lineHeight: "tall",
         scrollBehavior: "smooth",
         minHeight: "100vh",
+        maxHeight: "100vh",
         minWidth: "100wh",
+        maxWidth: "100wh",
         backgroundImage: `radial-gradient(${addOpacityToColor(
           "#E53E3E",
           0.5
@@ -39,6 +41,7 @@ const theme = extendTheme({
         margin: "0",
         backgroundColor: props.colorMode === "dark" ? "gray.800" : "gray.200",
         overflowX: "hidden !important",
+        overfloxY: "auto",
       },
       a: {
         color: props.colorMode === "dark" ? "red.300" : "red.200",

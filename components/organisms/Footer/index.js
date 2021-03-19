@@ -27,13 +27,13 @@ const Footer = ({ onClickAdd }) => {
       bgColor={backgroundColor}
       zIndex="1000"
     >
-      <Link href="/Home">
+      <Link href="/home">
         <CheckIcon fontSize="1.5rem" />
       </Link>
       <Button size="lg" variant="ghost" onClick={onClickAdd}>
         <AddIcon fontSize="1.5rem" />
       </Button>
-      <Link href="/Config">
+      <Link href="/settings">
         <SettingsIcon fontSize="1.5rem" />
       </Link>
     </Flex>

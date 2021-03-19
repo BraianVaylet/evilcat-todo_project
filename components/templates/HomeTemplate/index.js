@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 // ui
-import { Flex } from "@chakra-ui/layout"
+import { Flex, Text } from "@chakra-ui/layout"
 // components
 import ItemsList from "components/organisms/ItemsList"
 // context
@@ -18,11 +18,14 @@ const HomeTemplate = () => {
   const itemsContext = useContext(ItemsContext)
   const { handleGetAllItemsRealTime } = useContext(FirebaseContext)
   const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
+  useEffect(async () => {
     let unsubscribe
+    setLoading(true)
     if (user) {
-      unsubscribe = handleGetAllItemsRealTime(setItems)
+      unsubscribe = await handleGetAllItemsRealTime(setItems)
+      setLoading(false)
     }
     return () => unsubscribe && {}
   }, [user])
@@ -31,7 +34,13 @@ const HomeTemplate = () => {
 
   return (
     <Flex w="100%">
-      <ItemsList items={items} />
+      {loading ? (
+        <Text w="100%" textAlign="center">
+          Cargando...
+        </Text>
+      ) : (
+        <ItemsList items={items} />
+      )}
     </Flex>
   )
 }

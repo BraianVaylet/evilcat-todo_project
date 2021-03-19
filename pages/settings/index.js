@@ -5,11 +5,11 @@ import SettingsTemplate from "components/templates/SettingsTemplate"
 import Head from "next/head"
 
 /**
- * Config Page
+ * Settings Page
  * @component
- * @description Componente page Config
+ * @description Componente page Settings
  */
-const Config = () => {
+const Settings = () => {
   return (
     <>
       <Head>
@@ -21,4 +21,4 @@ const Config = () => {
     </>
   )
 }
-export default Config
+export default Settings

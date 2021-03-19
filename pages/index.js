@@ -1,42 +1,53 @@
 import { useEffect } from "react"
 // ui
-import { Flex } from "@chakra-ui/layout"
+import { Flex, Text } from "@chakra-ui/layout"
+import { Spinner } from "@chakra-ui/spinner"
 // components
-import useUser from "hooks/useUser"
+import LoginGoogle from "components/atoms/LoginGoogle"
+import Logo from "components/atoms/Logo"
+// hooks
+import useUser, { USER_STATES } from "hooks/useUser"
+// util/constants
+import { APP_TITLE } from "utils/constants"
 // next
 import { useRouter } from "next/router"
 import Head from "next/head"
-import { Spinner } from "@chakra-ui/spinner"
 
 /**
- * Main Page
+ * HomePage Page
  * @component
- * @description Componente page Main
+ * @description Componente page HomePage
  */
-export default function Main() {
+export default function HomePage() {
   const user = useUser()
   const router = useRouter()
 
-  useEffect(
-    () => (user === null ? router.push("/Login") : router.push("/Home")),
-    [user]
-  )
+  useEffect(() => {
+    user && router.replace("/home")
+  }, [user])
 
   return (
     <>
       <Head>
-        <title>Loading... | EvilCat</title>
+        <title>Login | EvilCat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex
         w="100%"
         align="center"
-        justify="center"
+        justify="space-around"
         direction="column"
         h="100%"
         minH="75vh"
       >
-        <Spinner size="xl" colorScheme="blue" />
+        <Flex w="100%" align="center" justify="center" direction="column">
+          <Logo iconSize="10rem" />
+          <Text fontSize="5rem">{APP_TITLE}</Text>
+        </Flex>
+        {user === USER_STATES.NOT_KNOWN && (
+          <Spinner size="xl" colorScheme="blue" />
+        )}
+        {user === USER_STATES.NOT_LOGGED && <LoginGoogle fontSize="3rem" />}
       </Flex>
     </>
   )
