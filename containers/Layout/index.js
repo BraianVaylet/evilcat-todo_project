@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
   return (
     <Flex display="grid" height="100vh" placeItems="center">
       <Flex
-        height={mediaQuery ? "90vh" : "100%"}
+        height={mediaQuery ? "100vh" : "100%"}
         width={mediaQuery ? MY_BREAKPOINTS.BREAK_MIN : "100%"}
         borderRadius="10px"
         boxShadow="lg"

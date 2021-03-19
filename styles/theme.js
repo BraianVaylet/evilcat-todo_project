@@ -28,9 +28,7 @@ const theme = extendTheme({
         lineHeight: "tall",
         scrollBehavior: "smooth",
         minHeight: "100vh",
-        maxHeight: "100vh",
         minWidth: "100wh",
-        maxWidth: "100wh",
         backgroundImage: `radial-gradient(${addOpacityToColor(
           "#E53E3E",
           0.5
