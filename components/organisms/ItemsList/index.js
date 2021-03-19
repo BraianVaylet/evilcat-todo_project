@@ -23,17 +23,28 @@ const ItemsList = () => {
       {itemsCheckFalse.map((item) => (
         <Item key={item.id} item={item} />
       ))}
-      <Divider m="4rem 0" size="2rem" colorScheme="blue" />
-      {itemsCheckTrue.map((item) => (
-        <Item key={item.id} item={item} />
-      ))}
-      <Divider m="4rem 0" size="2rem" colorScheme="blue" />
-      <Text fontSize="1.2rem" p=".5rem" color="gray.400">
-        Inactivos
-      </Text>
-      {itemsIsActiveFalse.map((item) => (
-        <ItemInactive key={item.id} item={item} />
-      ))}
+      {itemsCheckTrue.length > 0 && (
+        <>
+          <Divider m="4rem 0" size="2rem" colorScheme="blue" />
+          <Text fontSize="1.2rem" p=".5rem" color="gray.400">
+            Check
+          </Text>
+          {itemsCheckTrue.map((item) => (
+            <Item key={item.id} item={item} />
+          ))}
+        </>
+      )}
+      {itemsIsActiveFalse.length > 0 && (
+        <>
+          <Divider m="4rem 0" size="2rem" colorScheme="blue" />
+          <Text fontSize="1.2rem" p=".5rem" color="gray.400">
+            Inactivos
+          </Text>
+          {itemsIsActiveFalse.map((item) => (
+            <ItemInactive key={item.id} item={item} />
+          ))}
+        </>
+      )}
     </Accordion>
   )
 }

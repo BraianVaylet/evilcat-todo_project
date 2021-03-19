@@ -4,8 +4,6 @@ import { Flex } from "@chakra-ui/layout"
 import { useMediaQuery } from "@chakra-ui/media-query"
 // theme
 import { MY_BREAKPOINTS } from "styles/theme"
-// components
-import LayoutTemplate from "components/templates/LayoutTemplate"
 // hooks
 import useSetColorTheme from "hooks/useSetColorTheme"
 
@@ -21,7 +19,6 @@ const Layout = ({ children }) => {
   return (
     <Flex display="grid" height="100vh" placeItems="center">
       <Flex
-        className="Layout"
         height={mediaQuery ? "90vh" : "100%"}
         width={mediaQuery ? MY_BREAKPOINTS.BREAK_MIN : "100%"}
         borderRadius="10px"
@@ -34,11 +31,7 @@ const Layout = ({ children }) => {
         position="relative"
         bgColor={backgroundColor}
       >
-        <LayoutTemplate>
-          <Flex w="100%" mt="5rem">
-            {children}
-          </Flex>
-        </LayoutTemplate>
+        {children}
       </Flex>
     </Flex>
   )

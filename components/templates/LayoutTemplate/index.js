@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import PropTypes from "prop-types"
 // components
 import Navbar from "components/organisms/Navbar"
@@ -6,12 +6,9 @@ import ItemForm from "components/organisms/ItemForm"
 import Footer from "components/organisms/Footer"
 // ui
 import { useDisclosure } from "@chakra-ui/hooks"
-// next
-import { useRouter } from "next/router"
+import { Flex } from "@chakra-ui/layout"
 // context
 import { FormContext } from "context"
-// hooks
-import useUser from "hooks/useUser"
 
 /**
  * LayoutTemplate Component
@@ -20,34 +17,22 @@ import useUser from "hooks/useUser"
  */
 const LayoutTemplate = ({ children }) => {
   const { cleanContext } = useContext(FormContext)
-  const user = useUser()
-  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  useEffect(() => !user && router.replace("/"), [user])
 
   const handleClickAdd = () => {
     cleanContext()
     onOpen()
   }
 
-  const handleClickSettings = () => router.push("/Config")
-
-  const handleClickRefresh = () => {}
-
-  return user ? (
+  return (
     <>
       <Navbar />
-      {children}
-      <Footer
-        onClickAdd={handleClickAdd}
-        onClickSettings={handleClickSettings}
-        onClickRefresh={handleClickRefresh}
-      />
+      <Flex w="100%" mt="5rem">
+        {children}
+      </Flex>
+      <Footer onClickAdd={handleClickAdd} />
       <ItemForm isOpen={isOpen} onClose={onClose} />
     </>
-  ) : (
-    children
   )
 }
 

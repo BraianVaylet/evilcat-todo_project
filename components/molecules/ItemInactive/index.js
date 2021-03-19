@@ -56,27 +56,29 @@ const ItemInactive = ({ item }) => {
   return (
     <>
       <AccordionItem w="100%" bg={background}>
-        <AccordionButton w="100%">
-          <Flex align="center" justify="space-between" w="100%">
-            <IconButton
-              w="1rem"
-              mr="1rem"
-              icon={<TriangleUpIcon />}
-              onClick={handleClickActive}
-            />
-            <Flex align="center" justify="flex-start" ml=".75rem" w="100%">
-              <Flex align="center" justify="flex-start">
-                <Badge fontSize="1.25rem" color="gray.400">
-                  x{item.units}
-                </Badge>
-                <Text fontSize="1.5rem" ml="1rem" color="gray.400">
-                  {item.title}
-                </Text>
+        <Flex align="center" p="0 1rem">
+          <IconButton
+            w="1rem"
+            mr="1rem"
+            icon={<TriangleUpIcon />}
+            onClick={handleClickActive}
+          />
+          <AccordionButton w="100%">
+            <Flex align="center" justify="space-between" w="100%">
+              <Flex align="center" justify="flex-start" ml=".75rem" w="100%">
+                <Flex align="center" justify="flex-start">
+                  <Badge fontSize="1.25rem" color="gray.400">
+                    x{item.units}
+                  </Badge>
+                  <Text fontSize="1.5rem" ml="1rem" color="gray.400">
+                    {item.title}
+                  </Text>
+                </Flex>
               </Flex>
+              <AccordionIcon />
             </Flex>
-            <AccordionIcon />
-          </Flex>
-        </AccordionButton>
+          </AccordionButton>
+        </Flex>
         <AccordionPanel
           p=".5rem 1rem"
           w="100%"

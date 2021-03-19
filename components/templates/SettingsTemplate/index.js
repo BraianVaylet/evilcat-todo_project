@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 // ui
 import { Button } from "@chakra-ui/button"
@@ -6,10 +7,12 @@ import { Divider, Flex } from "@chakra-ui/layout"
 import ChangeLanguageBtn from "components/molecules/ChangeLanguageBtn"
 import ChangeThemeBtn from "components/molecules/ChangeThemeBtn"
 import CustomAvatar from "components/molecules/CustomAvatar"
-// hooks
-import useUser from "hooks/useUser"
 // firebase
 import { FirebaseClient } from "firebase/client"
+// hooks
+import useUser from "hooks/useUser"
+// next
+import { useRouter } from "next/router"
 
 /**
  * SettingsTemplate Component
@@ -18,8 +21,13 @@ import { FirebaseClient } from "firebase/client"
  */
 const SettingsTemplate = () => {
   const [t] = useTranslation("global")
-  const firebase = new FirebaseClient()
   const user = useUser()
+  const router = useRouter()
+  const firebase = new FirebaseClient()
+
+  useEffect(() => {
+    user === null && router.replace("/Login")
+  }, [user])
 
   const handleLogout = () => firebase.onAuthSignOut()
 
@@ -39,7 +47,6 @@ const SettingsTemplate = () => {
         direction="column"
       >
         <CustomAvatar
-          user={user}
           w="100%"
           direction="column"
           align="center"

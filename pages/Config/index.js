@@ -1,4 +1,5 @@
 // components
+import LayoutTemplate from "components/templates/LayoutTemplate"
 import SettingsTemplate from "components/templates/SettingsTemplate"
 // next
 import Head from "next/head"
@@ -14,7 +15,9 @@ const Config = () => {
       <Head>
         <title>Settings / EvilCat</title>
       </Head>
-      <SettingsTemplate />
+      <LayoutTemplate>
+        <SettingsTemplate />
+      </LayoutTemplate>
     </>
   )
 }

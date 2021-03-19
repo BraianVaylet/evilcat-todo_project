@@ -1,17 +1,19 @@
 import PropTypes from "prop-types"
 // ui
 import { Button } from "@chakra-ui/button"
-import { AddIcon, RepeatIcon, SettingsIcon } from "@chakra-ui/icons"
+import { AddIcon, CheckIcon, SettingsIcon } from "@chakra-ui/icons"
 import { Flex } from "@chakra-ui/layout"
 // hooks
 import useSetColorTheme from "hooks/useSetColorTheme"
+// next
+import Link from "next/link"
 
 /**
  * Footer Component
  * @component
  * @description Componente Footer con acceso a las paginas
  */
-const Footer = ({ onClickAdd, onClickSettings, onClickRefresh }) => {
+const Footer = ({ onClickAdd }) => {
   const backgroundColor = useSetColorTheme("gray.900", "white")
 
   return (
@@ -25,23 +27,21 @@ const Footer = ({ onClickAdd, onClickSettings, onClickRefresh }) => {
       bgColor={backgroundColor}
       zIndex="1000"
     >
-      <Button size="lg" variant="ghost" onClick={onClickRefresh}>
-        <RepeatIcon fontSize="1.5rem" />
-      </Button>
+      <Link href="/Home">
+        <CheckIcon fontSize="1.5rem" />
+      </Link>
       <Button size="lg" variant="ghost" onClick={onClickAdd}>
         <AddIcon fontSize="1.5rem" />
       </Button>
-      <Button size="lg" variant="ghost" onClick={onClickSettings}>
+      <Link href="/Config">
         <SettingsIcon fontSize="1.5rem" />
-      </Button>
+      </Link>
     </Flex>
   )
 }
 
 Footer.propTypes = {
   onClickAdd: PropTypes.func.isRequired,
-  onClickSettings: PropTypes.func.isRequired,
-  onClickRefresh: PropTypes.func.isRequired,
 }
 
 export default Footer

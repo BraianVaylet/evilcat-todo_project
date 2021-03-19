@@ -1,11 +1,10 @@
 import { useContext } from "react"
-import { useTranslation } from "react-i18next"
 import PropTypes from "prop-types"
 // ui
 import { CloseIcon, EditIcon } from "@chakra-ui/icons"
 import { Checkbox } from "@chakra-ui/checkbox"
 import { Badge, Flex, Text } from "@chakra-ui/layout"
-import { Button, IconButton } from "@chakra-ui/button"
+import { IconButton } from "@chakra-ui/button"
 import { useDisclosure } from "@chakra-ui/hooks"
 import {
   AccordionButton,
@@ -13,12 +12,10 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@chakra-ui/accordion"
-import { useToast } from "@chakra-ui/toast"
 // utils
 import { ItemPropTypes } from "utils/propTypes"
 // components
 import ItemForm from "components/organisms/ItemForm"
-import CustomDrawer from "components/atoms/CustomDrawer"
 // context
 import { FirebaseContext } from "context"
 
@@ -28,11 +25,8 @@ import { FirebaseContext } from "context"
  * @description Componente Item
  */
 const Item = ({ item }) => {
-  const [t] = useTranslation("global")
-  const toast = useToast()
   const { handleEditItem, handleIsActiveItem } = useContext(FirebaseContext)
   const EditCustomDrawer = useDisclosure()
-  const IsActiveFalseCustomDrawer = useDisclosure()
 
   const handleClickCkeck = (e) => {
     const newItem = item
@@ -41,19 +35,9 @@ const Item = ({ item }) => {
   }
 
   const handleClickInactive = () =>
-    handleIsActiveItem(item, false)
-      .then(() => {
-        toast({
-          title: t("Item.removed"),
-          description: "",
-          status: "success",
-          position: "top",
-          duration: 2000,
-          isClosable: true,
-        })
-        IsActiveFalseCustomDrawer.onClose()
-      })
-      .catch((error) => console.log(`error`, error))
+    handleIsActiveItem(item, false).catch((error) =>
+      console.log(`error`, error)
+    )
 
   return (
     <>
@@ -109,7 +93,7 @@ const Item = ({ item }) => {
               ml="2rem"
               variant="ghost"
               icon={<CloseIcon />}
-              onClick={IsActiveFalseCustomDrawer.onOpen}
+              onClick={handleClickInactive}
             />
           </Flex>
         </AccordionPanel>
@@ -120,25 +104,6 @@ const Item = ({ item }) => {
         onClose={EditCustomDrawer.onClose}
         item={item}
         withEditAction={EditCustomDrawer.isOpen}
-      />
-
-      <CustomDrawer
-        direction="top"
-        size="md"
-        isOpen={IsActiveFalseCustomDrawer.isOpen}
-        onClose={IsActiveFalseCustomDrawer.onClose}
-        header={<Text>{t("Item.inactiveItem")}</Text>}
-        body={<Text>{t("Item.questionInactiveItem")}</Text>}
-        footer={
-          <Flex>
-            <Button ml="1rem" onClick={IsActiveFalseCustomDrawer.onClose}>
-              {t("Item.cancel")}
-            </Button>
-            <Button ml="1rem" onClick={handleClickInactive}>
-              {t("Item.remove")}
-            </Button>
-          </Flex>
-        }
       />
     </>
   )
