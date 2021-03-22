@@ -91,6 +91,8 @@ const ItemForm = ({ isOpen, onClose, item, withEditAction }) => {
   return (
     <CustomDrawer
       withClose={false}
+      size="md"
+      direction="top"
       isOpen={isOpen}
       onClose={onClose}
       header={<Text fontSize="2.5rem">{t("ItemForm.title")}</Text>}
