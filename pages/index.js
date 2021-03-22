@@ -23,7 +23,7 @@ export default function HomePage() {
   const router = useRouter()
 
   useEffect(() => {
-    user && router.replace("/home")
+    user && router.replace("/Home")
   }, [user])
 
   return (
