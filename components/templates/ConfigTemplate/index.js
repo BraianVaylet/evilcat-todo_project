@@ -10,11 +10,11 @@ import CustomAvatar from "components/molecules/CustomAvatar"
 import { FirebaseClient } from "firebase/client"
 
 /**
- * SettingsTemplate Component
+ * ConfigTemplate Component
  * @component
- * @description Componente SettingsTemplate con acceso a la configuracion.
+ * @description Componente ConfigTemplate con acceso a la configuracion.
  */
-const SettingsTemplate = () => {
+const ConfigTemplate = () => {
   const [t] = useTranslation("global")
   const firebase = new FirebaseClient()
 
@@ -51,11 +51,11 @@ const SettingsTemplate = () => {
       </Flex>
       <Flex w="100%" mt="3rem" align="center" justify="center">
         <Button fontSize="1.5rem" variant="ghost" onClick={handleLogout}>
-          {t("SettingsTemplate.logout")}
+          {t("ConfigTemplate.logout")}
         </Button>
       </Flex>
     </Flex>
   )
 }
 
-export default SettingsTemplate
+export default ConfigTemplate

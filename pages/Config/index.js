@@ -1,6 +1,6 @@
 // components
 import LayoutTemplate from "components/templates/LayoutTemplate"
-import SettingsTemplate from "components/templates/SettingsTemplate"
+import ConfigTemplate from "components/templates/ConfigTemplate"
 // next
 import Head from "next/head"
 
@@ -9,16 +9,16 @@ import Head from "next/head"
  * @component
  * @description Componente page Settings
  */
-const Settings = () => {
+const Config = () => {
   return (
     <>
       <Head>
         <title>Settings / EvilCat</title>
       </Head>
       <LayoutTemplate>
-        <SettingsTemplate />
+        <ConfigTemplate />
       </LayoutTemplate>
     </>
   )
 }
-export default Settings
+export default Config

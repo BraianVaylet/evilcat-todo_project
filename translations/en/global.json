@@ -16,7 +16,7 @@
 	"LoginGoogle": {
 		"title": "Continue"
 	},
-	"SettingsTemplate": {
+	"ConfigTemplate": {
 		"logout": "Logout"
 	},
 	"Item": {

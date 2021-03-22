@@ -33,7 +33,7 @@ const Footer = ({ onClickAdd }) => {
       <Button size="lg" variant="ghost" onClick={onClickAdd}>
         <AddIcon fontSize="1.5rem" />
       </Button>
-      <Link href="/Settings">
+      <Link href="/Config">
         <SettingsIcon fontSize="1.5rem" />
       </Link>
     </Flex>
