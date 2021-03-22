@@ -8,7 +8,6 @@ import ChangeThemeBtn from "components/molecules/ChangeThemeBtn"
 import CustomAvatar from "components/molecules/CustomAvatar"
 // firebase
 import { FirebaseClient } from "firebase/client"
-import { Input } from "@chakra-ui/input"
 
 /**
  * ConfigTemplate Component
@@ -49,15 +48,6 @@ const ConfigTemplate = () => {
         <ChangeThemeBtn />
 
         <Divider m="3rem 0" />
-        <Input
-          placeholder="Item"
-          size="lg"
-          fontSize="2rem"
-          variant="filled"
-          autoFocus={true}
-          mb="2rem"
-          errorBorderColor="tomato"
-        />
       </Flex>
       <Flex w="100%" mt="3rem" align="center" justify="center">
         <Button fontSize="1.5rem" variant="ghost" onClick={handleLogout}>
