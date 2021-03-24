@@ -26,7 +26,9 @@ const LayoutTemplate = ({ children }) => {
 
   return (
     <>
-      <Navbar />
+      <Flex maxH="10vh" minH="10vh" h="10vh" w="100%">
+        <Navbar />
+      </Flex>
       <Flex
         direction="column"
         align="center"
