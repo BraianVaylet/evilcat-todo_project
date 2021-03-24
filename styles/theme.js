@@ -39,7 +39,7 @@ const theme = extendTheme({
         margin: "0",
         backgroundColor: props.colorMode === "dark" ? "gray.800" : "gray.200",
         overflowX: "hidden !important",
-        overfloxY: "auto",
+        overfloxY: "hidden !important",
       },
       a: {
         color: props.colorMode === "dark" ? "red.300" : "red.200",

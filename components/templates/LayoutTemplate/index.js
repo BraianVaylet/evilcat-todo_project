@@ -27,10 +27,27 @@ const LayoutTemplate = ({ children }) => {
   return (
     <>
       <Navbar />
-      <Flex w="100%" mt="5rem">
-        {children}
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        w="100%"
+        h="100%"
+      >
+        <Flex
+          w="100%"
+          maxH="80vh"
+          minH="80vh"
+          h="80vh"
+          overflowY="auto"
+          overflowX="none"
+        >
+          {children}
+        </Flex>
+        <Flex maxH="10vh" minH="10vh" h="10vh" w="100%">
+          <Footer onClickAdd={handleClickAdd} />
+        </Flex>
       </Flex>
-      <Footer onClickAdd={handleClickAdd} />
       <ItemForm isOpen={isOpen} onClose={onClose} />
     </>
   )

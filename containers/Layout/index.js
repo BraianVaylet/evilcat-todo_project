@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
         direction="column"
         justify="flex-start"
         align="center"
-        overflowY="auto"
+        overflowY="none"
         overflowX="none"
         position="relative"
         bgColor={backgroundColor}

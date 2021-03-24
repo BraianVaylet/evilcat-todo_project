@@ -22,10 +22,7 @@ const Footer = ({ onClickAdd }) => {
       align="center"
       justify="space-around"
       p="1rem"
-      position="absolute"
-      bottom="0"
       bgColor={backgroundColor}
-      zIndex="1000"
     >
       <Link href="/Home">
         <CheckIcon fontSize="1.5rem" />

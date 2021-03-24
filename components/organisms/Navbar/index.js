@@ -37,10 +37,13 @@ const Navbar = ({ onClickLogo }) => {
   return (
     <Flex
       w="100%"
+      maxH="10vh"
+      minH="10vh"
+      h="10vh"
       align="center"
       justify="space-between"
       p="1rem 2rem"
-      position="absolute"
+      position="sticky"
       top="0"
       bgColor={backgroundColor}
       zIndex="1000"
