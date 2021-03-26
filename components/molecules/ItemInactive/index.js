@@ -16,7 +16,6 @@ import {
 // utils
 import { ItemPropTypes } from "utils/propTypes"
 // components
-import ItemForm from "components/organisms/ItemForm"
 import CustomDrawer from "components/atoms/CustomDrawer"
 // context
 import { FirebaseContext } from "context"
@@ -105,13 +104,6 @@ const ItemInactive = ({ item }) => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
-
-      <ItemForm
-        isOpen={EditCustomDrawer.isOpen}
-        onClose={EditCustomDrawer.onClose}
-        item={item}
-        withEditAction={EditCustomDrawer.isOpen}
-      />
 
       <CustomDrawer
         direction="top"

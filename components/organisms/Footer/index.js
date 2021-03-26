@@ -1,6 +1,4 @@
-import PropTypes from "prop-types"
 // ui
-import { Button } from "@chakra-ui/button"
 import { AddIcon, CheckIcon, SettingsIcon } from "@chakra-ui/icons"
 import { Flex } from "@chakra-ui/layout"
 // hooks
@@ -13,7 +11,7 @@ import Link from "next/link"
  * @component
  * @description Componente Footer con acceso a las paginas
  */
-const Footer = ({ onClickAdd }) => {
+const Footer = () => {
   const backgroundColor = useSetColorTheme("gray.900", "white")
 
   return (
@@ -27,18 +25,14 @@ const Footer = ({ onClickAdd }) => {
       <Link href="/Home">
         <CheckIcon fontSize="1.5rem" />
       </Link>
-      <Button size="lg" variant="ghost" onClick={onClickAdd}>
+      <Link href="/Item">
         <AddIcon fontSize="1.5rem" />
-      </Button>
+      </Link>
       <Link href="/Config">
         <SettingsIcon fontSize="1.5rem" />
       </Link>
     </Flex>
   )
-}
-
-Footer.propTypes = {
-  onClickAdd: PropTypes.func.isRequired,
 }
 
 export default Footer

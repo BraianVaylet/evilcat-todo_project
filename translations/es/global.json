@@ -7,7 +7,7 @@
 	"ChangeThemeBtn": {
 		"title": "Cambiar tema"
 	},
-	"ItemForm": {
+	"ItemTitle": {
 		"title": "Nuevo Item",
 		"save": "Guardar",
 		"success": "👍 Nuevo Item, Éxito",

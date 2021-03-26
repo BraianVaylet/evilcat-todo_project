@@ -14,8 +14,6 @@ import {
 } from "@chakra-ui/accordion"
 // utils
 import { ItemPropTypes } from "utils/propTypes"
-// components
-import ItemForm from "components/organisms/ItemForm"
 // context
 import { FirebaseContext } from "context"
 
@@ -98,13 +96,6 @@ const Item = ({ item }) => {
           </Flex>
         </AccordionPanel>
       </AccordionItem>
-
-      <ItemForm
-        isOpen={EditCustomDrawer.isOpen}
-        onClose={EditCustomDrawer.onClose}
-        item={item}
-        withEditAction={EditCustomDrawer.isOpen}
-      />
     </>
   )
 }

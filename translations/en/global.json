@@ -7,7 +7,7 @@
 	"ChangeThemeBtn": {
 		"title": "Change theme"
 	},
-	"ItemForm": {
+	"ItemTitle": {
 		"title": "New Item",
 		"save": "Save",
 		"success": "👍 New Item Success",

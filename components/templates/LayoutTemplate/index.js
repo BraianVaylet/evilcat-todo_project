@@ -1,14 +1,9 @@
-import { useContext } from "react"
 import PropTypes from "prop-types"
 // components
 import Navbar from "components/organisms/Navbar"
-import ItemForm from "components/organisms/ItemForm"
 import Footer from "components/organisms/Footer"
 // ui
-import { useDisclosure } from "@chakra-ui/hooks"
 import { Flex } from "@chakra-ui/layout"
-// context
-import { FormContext } from "context"
 
 /**
  * LayoutTemplate Component
@@ -16,14 +11,6 @@ import { FormContext } from "context"
  * @description Componente LayoutTemplate con Navbar yoptimi Footer
  */
 const LayoutTemplate = ({ children }) => {
-  const { cleanContext } = useContext(FormContext)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const handleClickAdd = () => {
-    cleanContext()
-    onOpen()
-  }
-
   return (
     <>
       <Flex maxH="10vh" minH="10vh" h="10vh" w="100%">
@@ -47,10 +34,9 @@ const LayoutTemplate = ({ children }) => {
           {children}
         </Flex>
         <Flex maxH="10vh" minH="10vh" h="10vh" w="100%">
-          <Footer onClickAdd={handleClickAdd} />
+          <Footer />
         </Flex>
       </Flex>
-      <ItemForm isOpen={isOpen} onClose={onClose} />
     </>
   )
 }
