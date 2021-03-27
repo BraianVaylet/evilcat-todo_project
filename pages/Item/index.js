@@ -12,7 +12,7 @@ const Item = () => {
   return (
     <>
       <Head>
-        <title>Inicio / EvilCat</title>
+        <title>=Item / EvilCat</title>
       </Head>
       <ItemTemplate />
     </>

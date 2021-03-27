@@ -2,34 +2,33 @@ import { useContext, useState } from "react"
 // import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 // ui
-import { Flex, Text } from "@chakra-ui/layout"
-import { Input } from "@chakra-ui/input"
+import { Box, Flex, Text } from "@chakra-ui/layout"
 import { Button } from "@chakra-ui/button"
 // containers
 import WrapperItem from "containers/WrapperItem"
+// components
+import Counter from "components/molecules/Counter"
 // context
 import { FormContext } from "context"
 // next
 import { useRouter } from "next/router"
 
 /**
- * ItemTemplate Component
+ * UnitsTemplate Component
  * @component
- * @description Componente ItemTemplate con acceso a la configuracion.
+ * @description Componente UnitsTemplate con acceso a la configuracion.
  */
-const ItemTemplate = () => {
+const UnitsTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
-  const { title, setTitle } = useContext(FormContext)
+  const { count } = useContext(FormContext)
   const [error, setError] = useState(null)
 
-  const handleChangeInput = (e) => setTitle(e.target.value)
-
   const handleContinue = () =>
-    title !== "" ? router.push("/Price") : setError("Ingrese un Item")
+    count !== "NaN" ? router.push("/Units") : setError("Algo falló")
 
   return (
-    <WrapperItem title={t("ItemTemplate.title")}>
+    <WrapperItem title={t("UnitsTemplate.title")}>
       <Flex
         align="center"
         justify="space-between"
@@ -45,17 +44,9 @@ const ItemTemplate = () => {
           h="100%"
           p="3rem 1rem"
         >
-          <Input
-            value={title}
-            onChange={handleChangeInput}
-            placeholder="Item"
-            size="lg"
-            fontSize="20px"
-            variant="filled"
-            autoFocus={true}
-            isInvalid={error}
-            errorBorderColor="tomato"
-          />
+          <Box mt="4rem">
+            <Counter />
+          </Box>
           <Flex
             direction="column"
             align="center"
@@ -64,7 +55,7 @@ const ItemTemplate = () => {
             mb="3rem"
           >
             <Button w="100%" p="15px" onClick={handleContinue}>
-              <Text fontSize="20px">{t("ItemTemplate.continue")}</Text>
+              <Text fontSize="20px">{t("UnitsTemplate.continue")}</Text>
             </Button>
             {error && (
               <Text color="tomato" fontSize="1rem" mt=".5rem">
@@ -78,4 +69,4 @@ const ItemTemplate = () => {
   )
 }
 
-export default ItemTemplate
+export default UnitsTemplate

@@ -7,11 +7,22 @@
 	"ChangeThemeBtn": {
 		"title": "Cambiar tema"
 	},
-	"ItemTitle": {
+	"ItemTemplate": {
 		"title": "Nuevo Item",
 		"save": "Guardar",
+		"continue": "Continuar",
 		"success": "👍 Nuevo Item, Éxito",
 		"error": "👎 Nuevo Item, Error"
+	},
+	"PriceTemplate": {
+		"title": "Agregar precio",
+		"save": "Guardar",
+		"continue": "Continuar"
+	},
+	"UnitsTemplate": {
+		"title": "Agregar unidades",
+		"save": "Guardar",
+		"continue": "Continuar"
 	},
 	"LoginGoogle": {
 		"title": "Continuar"
