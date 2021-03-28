@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useTranslation } from "react-i18next"
 import PropTypes from "prop-types"
 // ui
-import { DeleteIcon, EditIcon, TriangleUpIcon } from "@chakra-ui/icons"
+import { TriangleUpIcon } from "@chakra-ui/icons"
 import { Badge, Flex, Text } from "@chakra-ui/layout"
 import { Button, IconButton } from "@chakra-ui/button"
 import { useDisclosure } from "@chakra-ui/hooks"
@@ -20,6 +20,7 @@ import CustomDrawer from "components/atoms/CustomDrawer"
 // context
 import { FirebaseContext } from "context"
 import useSetColorTheme from "hooks/useSetColorTheme"
+import ItemFooter from "../ItemFooter"
 
 /**
  * Item Component
@@ -31,7 +32,6 @@ const ItemInactive = ({ item }) => {
   const background = useSetColorTheme("gray.700", "gray.200")
   const toast = useToast()
   const { handleDeleteItem, handleIsActiveItem } = useContext(FirebaseContext)
-  const EditCustomDrawer = useDisclosure()
   const DeleteCustomDrawer = useDisclosure()
 
   const handleClickActive = () =>
@@ -78,30 +78,8 @@ const ItemInactive = ({ item }) => {
             </Flex>
           </AccordionButton>
         </Flex>
-        <AccordionPanel
-          p=".5rem 1rem"
-          w="100%"
-          as={Flex}
-          align="center"
-          justify="space-between"
-        >
-          <Text ml="2rem" fontSize="1.5rem">
-            ${item.price}
-          </Text>
-          <Flex>
-            <IconButton
-              ml="2rem"
-              variant="ghost"
-              icon={<EditIcon />}
-              onClick={EditCustomDrawer.onOpen}
-            />
-            <IconButton
-              ml="2rem"
-              variant="ghost"
-              icon={<DeleteIcon />}
-              onClick={DeleteCustomDrawer.onOpen}
-            />
-          </Flex>
+        <AccordionPanel p=".5rem 1rem" w="100%">
+          <ItemFooter item={item} onClickRemove={DeleteCustomDrawer.onOpen} />
         </AccordionPanel>
       </AccordionItem>
 

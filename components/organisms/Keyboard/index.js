@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 // ui
 import { Flex } from "@chakra-ui/layout"
 // component
@@ -13,13 +13,23 @@ import { ChevronLeftIcon, DeleteIcon } from "@chakra-ui/icons"
  * @description Componente Keyboard, Formulario de alta/edicion de items
  */
 const Keyboard = () => {
-  const { price, setPrice } = useContext(FormContext)
+  const { price, setPrice, item, setItem } = useContext(FormContext)
   const arrKeys = {
     base: ["clean", "0", "delete"],
     level1: ["1", "2", "3"],
     level2: ["4", "5", "6"],
     level3: ["7", "8", "9"],
   }
+
+  useEffect(() => {
+    const _item = item
+    console.log(`price`, price)
+    if (price !== "NaN") {
+      _item.price = price
+    }
+    console.log(`_item`, _item)
+    setItem(_item)
+  }, [price])
 
   const handleClick = (value) => {
     let number = price.toString()

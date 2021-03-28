@@ -4,7 +4,7 @@ import { Flex, Text } from "@chakra-ui/layout"
 // components
 import ItemsList from "components/organisms/ItemsList"
 // context
-import { FirebaseContext, ItemsContext } from "context"
+import { FirebaseContext, FormContext, ItemsContext } from "context"
 // hooks
 import useUser from "hooks/useUser"
 
@@ -16,9 +16,12 @@ import useUser from "hooks/useUser"
 const HomeTemplate = () => {
   const user = useUser()
   const itemsContext = useContext(ItemsContext)
+  const { cleanContext } = useContext(FormContext)
   const { handleGetAllItemsRealTime } = useContext(FirebaseContext)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => cleanContext(), [])
 
   useEffect(async () => {
     let unsubscribe

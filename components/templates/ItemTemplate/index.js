@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 // import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 // ui
@@ -8,9 +8,10 @@ import { Button } from "@chakra-ui/button"
 // containers
 import WrapperItem from "containers/WrapperItem"
 // context
-import { FormContext } from "context"
+import { FirebaseContext, FormContext } from "context"
 // next
 import { useRouter } from "next/router"
+import { useToast } from "@chakra-ui/toast"
 
 /**
  * ItemTemplate Component
@@ -20,13 +21,52 @@ import { useRouter } from "next/router"
 const ItemTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
-  const { title, setTitle } = useContext(FormContext)
+  const toast = useToast()
+  const { item, setItem, title, setTitle, isEditing } = useContext(FormContext)
+  const { handleEditItem } = useContext(FirebaseContext)
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const _item = item
+    _item.title = title
+    setItem(_item)
+  }, [title])
 
   const handleChangeInput = (e) => setTitle(e.target.value)
 
   const handleContinue = () =>
     title !== "" ? router.push("/Price") : setError("Ingrese un Item")
+
+  const handleEdit = () => {
+    if (title !== "" && item) {
+      handleEditItem(item)
+        .then(() => {
+          toast({
+            title: t("ItemForm.success"),
+            description: "",
+            status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+          router.push("/Home")
+        })
+        .catch((error) => {
+          console.log(`error`, error)
+          toast({
+            title: t("ItemForm.error"),
+            description: "",
+            status: "error",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+          setError("Algo falló")
+        })
+    } else {
+      setError("Ingrese un titulo al item")
+    }
+  }
 
   return (
     <WrapperItem title={t("ItemTemplate.title")}>
@@ -63,9 +103,15 @@ const ItemTemplate = () => {
             w="100%"
             mb="3rem"
           >
-            <Button w="100%" p="15px" onClick={handleContinue}>
-              <Text fontSize="20px">{t("ItemTemplate.continue")}</Text>
-            </Button>
+            {isEditing ? (
+              <Button w="100%" p="15px" onClick={handleEdit}>
+                <Text fontSize="20px">{t("ItemTemplate.save")}</Text>
+              </Button>
+            ) : (
+              <Button w="100%" p="15px" onClick={handleContinue}>
+                <Text fontSize="20px">{t("ItemTemplate.continue")}</Text>
+              </Button>
+            )}
             {error && (
               <Text color="tomato" fontSize="1rem" mt=".5rem">
                 {error}

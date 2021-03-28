@@ -1,11 +1,8 @@
 import { useContext } from "react"
 import PropTypes from "prop-types"
 // ui
-import { CloseIcon, EditIcon } from "@chakra-ui/icons"
 import { Checkbox } from "@chakra-ui/checkbox"
 import { Badge, Flex, Text } from "@chakra-ui/layout"
-import { IconButton } from "@chakra-ui/button"
-import { useDisclosure } from "@chakra-ui/hooks"
 import {
   AccordionButton,
   AccordionIcon,
@@ -15,7 +12,8 @@ import {
 // utils
 import { ItemPropTypes } from "utils/propTypes"
 // context
-import { FirebaseContext } from "context"
+import { FirebaseContext, FormContext } from "context"
+import ItemFooter from "../ItemFooter"
 
 /**
  * Item Component
@@ -24,7 +22,9 @@ import { FirebaseContext } from "context"
  */
 const Item = ({ item }) => {
   const { handleEditItem, handleIsActiveItem } = useContext(FirebaseContext)
-  const EditCustomDrawer = useDisclosure()
+  const { setItem, setTitle, setPrice, setCount, setIsEditing } = useContext(
+    FormContext
+  )
 
   const handleClickCkeck = (e) => {
     const newItem = item
@@ -37,10 +37,21 @@ const Item = ({ item }) => {
       console.log(`error`, error)
     )
 
+  const handleClickAccordion = () => {
+    if (item) {
+      console.log(`item###`, item)
+      setItem(item)
+      setTitle(item.title)
+      setPrice(item.price)
+      setCount(item.units)
+      setIsEditing(true)
+    }
+  }
+
   return (
     <>
       <AccordionItem w="100%">
-        <AccordionButton w="100%">
+        <AccordionButton w="100%" onClick={handleClickAccordion}>
           <Flex align="center" justify="space-between" w="100%">
             <Checkbox
               size="lg"
@@ -70,30 +81,8 @@ const Item = ({ item }) => {
             <AccordionIcon />
           </Flex>
         </AccordionButton>
-        <AccordionPanel
-          p=".5rem 1rem"
-          w="100%"
-          as={Flex}
-          align="center"
-          justify="space-between"
-        >
-          <Text ml="2rem" fontSize="1.5rem">
-            ${item.price}
-          </Text>
-          <Flex>
-            <IconButton
-              ml="2rem"
-              variant="ghost"
-              icon={<EditIcon />}
-              onClick={EditCustomDrawer.onOpen}
-            />
-            <IconButton
-              ml="2rem"
-              variant="ghost"
-              icon={<CloseIcon />}
-              onClick={handleClickInactive}
-            />
-          </Flex>
+        <AccordionPanel p=".5rem 1rem" w="100%">
+          <ItemFooter item={item} onClickRemove={handleClickInactive} />
         </AccordionPanel>
       </AccordionItem>
     </>

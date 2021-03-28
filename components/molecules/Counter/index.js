@@ -1,10 +1,11 @@
 import { useContext } from "react"
 // ui
-import { IconButton } from "@chakra-ui/button"
 import { AddIcon, MinusIcon } from "@chakra-ui/icons"
 import { Flex, Text } from "@chakra-ui/layout"
 // context
 import { FormContext } from "context"
+// component
+import Key from "../Key"
 
 /**
  * Counter Component
@@ -20,11 +21,15 @@ const Counter = () => {
 
   return (
     <Flex w="100%" align="center" justify="center">
-      <IconButton icon={<MinusIcon />} onClick={handleRemove} variant="ghost" />
+      <Key onClick={handleRemove}>
+        <MinusIcon />
+      </Key>
       <Text textAlign="center" fontSize="3rem" w="50vw">
         {count === 0 ? count : "x" + count}
       </Text>
-      <IconButton icon={<AddIcon />} onClick={handleAdd} variant="ghost" />
+      <Key onClick={handleAdd}>
+        <AddIcon />
+      </Key>
     </Flex>
   )
 }

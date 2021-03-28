@@ -10,9 +10,10 @@ import WrapperItem from "containers/WrapperItem"
 // components
 import Keyboard from "components/organisms/Keyboard"
 // context
-import { FormContext } from "context"
+import { FirebaseContext, FormContext } from "context"
 // next
 import { useRouter } from "next/router"
+import { useToast } from "@chakra-ui/toast"
 
 /**
  * PriceTemplate Component
@@ -22,12 +23,44 @@ import { useRouter } from "next/router"
 const PriceTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
-  const { price } = useContext(FormContext)
+  const toast = useToast()
+  const { item, price, isEditing } = useContext(FormContext)
+  const { handleEditItem } = useContext(FirebaseContext)
   const [error, setError] = useState(null)
 
   const handleContinue = () =>
     price !== "NaN" ? router.push("/Units") : setError("Algo falló")
 
+  const handleEdit = () => {
+    if (price !== "NaN" && item) {
+      handleEditItem(item)
+        .then(() => {
+          toast({
+            title: t("ItemForm.success"),
+            description: "",
+            status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+          router.push("/Home")
+        })
+        .catch((error) => {
+          console.log(`error`, error)
+          toast({
+            title: t("ItemForm.error"),
+            description: "",
+            status: "error",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          })
+          setError("Algo falló")
+        })
+    } else {
+      setError("Ingrese un titulo al item")
+    }
+  }
   return (
     <WrapperItem title={t("PriceTemplate.title")}>
       <Flex
@@ -64,9 +97,15 @@ const PriceTemplate = () => {
             w="100%"
             mb="3rem"
           >
-            <Button w="100%" p="15px" onClick={handleContinue}>
-              <Text fontSize="20px">{t("PriceTemplate.continue")}</Text>
-            </Button>
+            {isEditing ? (
+              <Button w="100%" p="15px" onClick={handleEdit}>
+                <Text fontSize="20px">{t("PriceTemplate.save")}</Text>
+              </Button>
+            ) : (
+              <Button w="100%" p="15px" onClick={handleContinue}>
+                <Text fontSize="20px">{t("PriceTemplate.continue")}</Text>
+              </Button>
+            )}
             {error && (
               <Text color="tomato" fontSize="1rem" mt=".5rem">
                 {error}
