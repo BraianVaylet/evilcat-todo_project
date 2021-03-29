@@ -36,5 +36,9 @@
 		"cancel": "Cancelar",
 		"delete": "Eliminar",
 		"deleted": "Eliminado"
+	},
+	"toasts": {
+		"success": "👍 Éxito",
+		"error": "👎 Error"
 	}
 }

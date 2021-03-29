@@ -6,14 +6,14 @@ export const FormContext = createContext({})
 export const FormContextProvider = ({ children }) => {
   const [item, setItem] = useState(null)
   const [title, setTitle] = useState("")
-  const [count, setCount] = useState(1)
+  const [units, setUnits] = useState(1)
   const [price, setPrice] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
 
   const cleanContext = () => {
     setItem(null)
     setTitle("")
-    setCount(1)
+    setUnits(1)
     setPrice(0)
     setIsEditing(false)
   }
@@ -25,8 +25,8 @@ export const FormContextProvider = ({ children }) => {
         setItem,
         title,
         setTitle,
-        count,
-        setCount,
+        units,
+        setUnits,
         price,
         setPrice,
         isEditing,

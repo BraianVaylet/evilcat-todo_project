@@ -31,23 +31,35 @@ export default function HomePage() {
       <Head>
         <title>Login | EvilCat</title>
       </Head>
-      <Flex
-        w="100%"
-        align="center"
-        justify="space-around"
-        direction="column"
-        h="100%"
-        minH="75vh"
-      >
-        <Flex w="100%" align="center" justify="center" direction="column">
-          <Logo iconSize="10rem" />
-          <Text fontSize="5rem">{APP_TITLE}</Text>
-        </Flex>
-        {user === USER_STATES.NOT_KNOWN && (
+      {user === USER_STATES.NOT_KNOWN && (
+        <Flex
+          w="100%"
+          align="center"
+          justify="space-around"
+          direction="column"
+          h="100%"
+          minH="75vh"
+        >
           <Spinner size="xl" colorScheme="blue" />
-        )}
-        {user === USER_STATES.NOT_LOGGED && <LoginGoogle fontSize="3rem" />}
-      </Flex>
+        </Flex>
+      )}
+      {user === USER_STATES.NOT_LOGGED && (
+        <Flex
+          w="100%"
+          align="center"
+          justify="space-around"
+          direction="column"
+          h="100%"
+          minH="75vh"
+        >
+          <Flex w="100%" align="center" justify="center" direction="column">
+            <Logo iconSize="10rem" />
+            <Text fontSize="5rem">{APP_TITLE}</Text>
+          </Flex>
+
+          <LoginGoogle fontSize="3rem" />
+        </Flex>
+      )}
     </>
   )
 }

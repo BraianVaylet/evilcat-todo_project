@@ -22,7 +22,7 @@ import ItemFooter from "../ItemFooter"
  */
 const Item = ({ item }) => {
   const { handleEditItem, handleIsActiveItem } = useContext(FirebaseContext)
-  const { setItem, setTitle, setPrice, setCount, setIsEditing } = useContext(
+  const { setItem, setTitle, setPrice, setUnits, setIsEditing } = useContext(
     FormContext
   )
 
@@ -43,7 +43,7 @@ const Item = ({ item }) => {
       setItem(item)
       setTitle(item.title)
       setPrice(item.price)
-      setCount(item.units)
+      setUnits(item.units)
       setIsEditing(true)
     }
   }
@@ -64,6 +64,7 @@ const Item = ({ item }) => {
               <Flex align="center" justify="flex-start">
                 <Badge
                   fontSize="1.25rem"
+                  colorScheme={item.units === 0 ? "red" : "success"}
                   color={item.check ? "gray.400" : undefined}
                 >
                   x{item.units}

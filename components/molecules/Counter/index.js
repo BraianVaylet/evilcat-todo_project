@@ -5,7 +5,7 @@ import { Flex, Text } from "@chakra-ui/layout"
 // context
 import { FormContext } from "context"
 // component
-import Key from "../Key"
+import Key from "components/atoms/Key"
 
 /**
  * Counter Component
@@ -13,19 +13,19 @@ import Key from "../Key"
  * @description Componente Counter para la carga de unidades
  */
 const Counter = () => {
-  const { count, setCount } = useContext(FormContext)
+  const { units, setUnits } = useContext(FormContext)
 
-  const handleAdd = () => setCount(count + 1)
+  const handleAdd = () => setUnits(units + 1)
 
-  const handleRemove = () => count > 0 && setCount(count - 1)
+  const handleRemove = () => units > 0 && setUnits(units - 1)
 
   return (
     <Flex w="100%" align="center" justify="center">
       <Key onClick={handleRemove}>
         <MinusIcon />
       </Key>
-      <Text textAlign="center" fontSize="3rem" w="50vw">
-        {count === 0 ? count : "x" + count}
+      <Text textAlign="center" fontSize="3rem" w="50vw" m="0 1rem">
+        {units === 0 ? units : "x" + units}
       </Text>
       <Key onClick={handleAdd}>
         <AddIcon />

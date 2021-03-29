@@ -27,9 +27,11 @@ const ItemTemplate = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const _item = item
-    _item.title = title
-    setItem(_item)
+    if (item) {
+      const _item = item
+      _item.title = item !== "" && title
+      setItem(_item)
+    }
   }, [title])
 
   const handleChangeInput = (e) => setTitle(e.target.value)
@@ -42,7 +44,7 @@ const ItemTemplate = () => {
       handleEditItem(item)
         .then(() => {
           toast({
-            title: t("ItemForm.success"),
+            title: t("toasts.success"),
             description: "",
             status: "success",
             position: "top",
@@ -54,7 +56,7 @@ const ItemTemplate = () => {
         .catch((error) => {
           console.log(`error`, error)
           toast({
-            title: t("ItemForm.error"),
+            title: t("toasts.error"),
             description: "",
             status: "error",
             position: "top",

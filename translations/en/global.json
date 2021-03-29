@@ -40,5 +40,9 @@
 		"questionInactiveItem": "Are you sure to remove this item?",
 		"remove": "Remove",
 		"removed": "Item removed"
+	},
+	"toasts": {
+		"success": "👍 Success",
+		"error": "👎 Error"
 	}
 }

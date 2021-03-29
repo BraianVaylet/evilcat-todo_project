@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 // import PropTypes from "prop-types"
 import { useTranslation } from "react-i18next"
 // ui
@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/button"
 // containers
 import WrapperItem from "containers/WrapperItem"
 // components
-import Keyboard from "components/organisms/Keyboard"
+import Keyboard from "components/molecules/Keyboard"
 // context
 import { FirebaseContext, FormContext } from "context"
 // next
@@ -24,9 +24,17 @@ const PriceTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
   const toast = useToast()
-  const { item, price, isEditing } = useContext(FormContext)
+  const { item, setItem, price, isEditing } = useContext(FormContext)
   const { handleEditItem } = useContext(FirebaseContext)
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (item) {
+      const _item = item
+      _item.price = price !== "NaN" && parseInt(price)
+      setItem(_item)
+    }
+  }, [price])
 
   const handleContinue = () =>
     price !== "NaN" ? router.push("/Units") : setError("Algo falló")
@@ -36,7 +44,7 @@ const PriceTemplate = () => {
       handleEditItem(item)
         .then(() => {
           toast({
-            title: t("ItemForm.success"),
+            title: t("toasts.success"),
             description: "",
             status: "success",
             position: "top",
@@ -48,7 +56,7 @@ const PriceTemplate = () => {
         .catch((error) => {
           console.log(`error`, error)
           toast({
-            title: t("ItemForm.error"),
+            title: t("toasts.error"),
             description: "",
             status: "error",
             position: "top",

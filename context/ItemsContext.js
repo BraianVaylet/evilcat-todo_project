@@ -17,12 +17,23 @@ export const ItemsContextProvider = ({ children }) => {
     setItemsCheckFalse(checkFalse)
   }, [items])
 
-  const activeTrue = items.filter((item) => item.isActive === true)
-  const activeFalse = items.filter((item) => item.isActive === false)
-  const checkTrue = items.filter(
+  const handleSortItems = (items) =>
+    items.sort((a, b) => {
+      if (a.title < b.title) return -1
+      if (a.title > b.title) return 1
+      return 0
+    })
+
+  const activeTrue = handleSortItems(items).filter(
+    (item) => item.isActive === true
+  )
+  const activeFalse = handleSortItems(items).filter(
+    (item) => item.isActive === false
+  )
+  const checkTrue = handleSortItems(items).filter(
     (item) => item.isActive === true && item.check === true
   )
-  const checkFalse = items.filter(
+  const checkFalse = handleSortItems(items).filter(
     (item) => item.isActive === true && item.check === false
   )
 
