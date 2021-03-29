@@ -20,11 +20,11 @@ const Counter = () => {
   const handleRemove = () => units > 0 && setUnits(units - 1)
 
   return (
-    <Flex w="100%" align="center" justify="center">
+    <Flex align="center" justify="center">
       <Key onClick={handleRemove}>
         <MinusIcon />
       </Key>
-      <Text textAlign="center" fontSize="3rem" w="50vw" m="0 1rem">
+      <Text textAlign="center" fontSize="3rem" w="50%">
         {units === 0 ? units : "x" + units}
       </Text>
       <Key onClick={handleAdd}>
