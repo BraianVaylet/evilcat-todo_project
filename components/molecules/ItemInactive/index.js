@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useTranslation } from "react-i18next"
 import PropTypes from "prop-types"
 // ui
-import { TriangleUpIcon } from "@chakra-ui/icons"
+import { DeleteIcon, TriangleUpIcon } from "@chakra-ui/icons"
 import { Badge, Flex, Text } from "@chakra-ui/layout"
 import { Button, IconButton } from "@chakra-ui/button"
 import { useDisclosure } from "@chakra-ui/hooks"
@@ -79,7 +79,11 @@ const ItemInactive = ({ item }) => {
           </AccordionButton>
         </Flex>
         <AccordionPanel p=".5rem 1rem" w="100%">
-          <ItemFooter item={item} onClickRemove={DeleteCustomDrawer.onOpen} />
+          <ItemFooter
+            item={item}
+            onClickRemove={DeleteCustomDrawer.onOpen}
+            removeIcon={<DeleteIcon />}
+          />
         </AccordionPanel>
       </AccordionItem>
 

@@ -128,7 +128,7 @@ const UnitsTemplate = () => {
           h="100%"
           p="3rem 1rem"
         >
-          <Box mt="4rem" w="75%">
+          <Box mt="4rem" w="100%">
             <Counter />
           </Box>
           <Flex

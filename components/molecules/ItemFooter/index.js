@@ -15,7 +15,7 @@ import Link from "next/link"
  * @component
  * @description Componente ItemFooter
  */
-const ItemFooter = ({ item, onClickRemove }) => {
+const ItemFooter = ({ item, onClickRemove, removeIcon }) => {
   return (
     <Flex w="100%" align="center" justify="space-between">
       <Text ml="2rem" fontSize="1.5rem">
@@ -49,7 +49,7 @@ const ItemFooter = ({ item, onClickRemove }) => {
         <IconButton
           ml="2rem"
           variant="ghost"
-          icon={<CloseIcon />}
+          icon={removeIcon}
           onClick={onClickRemove}
         />
       </Flex>
@@ -57,9 +57,14 @@ const ItemFooter = ({ item, onClickRemove }) => {
   )
 }
 
+ItemFooter.defaultProps = {
+  removeIcon: <CloseIcon />,
+}
+
 ItemFooter.propTypes = {
   item: PropTypes.shape(ItemPropTypes),
   onClickRemove: PropTypes.func.isRequired,
+  removeIcon: PropTypes.element,
 }
 
 export default ItemFooter
