@@ -30,8 +30,6 @@ const Layout = ({ children }) => {
         overflowX="none"
         position="relative"
         bgColor={backgroundColor}
-        scrollbarColor="rgba(0, 0, 0, .5) rgba(0, 0, 0, 0)"
-        scrollbarWidth="thin"
       >
         {children}
       </Flex>

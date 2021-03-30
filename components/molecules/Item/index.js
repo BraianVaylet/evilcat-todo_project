@@ -39,7 +39,6 @@ const Item = ({ item }) => {
 
   const handleClickAccordion = () => {
     if (item) {
-      console.log(`item###`, item)
       setItem(item)
       setTitle(item.title)
       setPrice(item.price)

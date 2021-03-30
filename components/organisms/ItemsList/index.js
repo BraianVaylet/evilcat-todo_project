@@ -1,12 +1,13 @@
 import { useContext } from "react"
+import { ImCheckmark2, ImCheckmark, ImBackward2 } from "react-icons/im"
 // ui
-import { Divider, Text } from "@chakra-ui/layout"
+import { Divider } from "@chakra-ui/layout"
 import { Accordion } from "@chakra-ui/accordion"
-// components
-import Item from "components/molecules/Item"
-import ItemInactive from "components/molecules/ItemInactive"
+import Icon from "@chakra-ui/icon"
 // context
-import { ItemsContext } from "context"
+import { FirebaseContext, ItemsContext } from "context"
+import { IconButton } from "@chakra-ui/button"
+import ItemListSection from "components/molecules/ItemListSection"
 
 /**
  * ItemsList Component
@@ -14,37 +15,94 @@ import { ItemsContext } from "context"
  * @description Componente ItemsList. Listado de Items
  */
 const ItemsList = () => {
-  const { itemsCheckTrue, itemsCheckFalse, itemsIsActiveFalse } = useContext(
-    ItemsContext
-  )
+  const {
+    items,
+    itemsCheckTrue,
+    itemsCheckFalse,
+    itemsIsActiveFalse,
+  } = useContext(ItemsContext)
+  const { handleEditItem } = useContext(FirebaseContext)
+
+  const handleConditionAndEdit = (item, condition, check, isActive) => {
+    if (condition) {
+      item.check = check
+      item.isActive = isActive
+      return handleEditItem(item).catch((error) => console.log(`error`, error))
+    } else {
+      return false
+    }
+  }
+
+  const handleCheckAll = () =>
+    items.map((item) =>
+      handleConditionAndEdit(
+        item,
+        item.check === false && item.isActive === true,
+        true,
+        item.isActive
+      )
+    )
+
+  const handleUnCheckAll = () =>
+    items.map((item) =>
+      handleConditionAndEdit(
+        item,
+        item.check === true && item.isActive === true,
+        false,
+        item.isActive
+      )
+    )
+
+  const handleIsActiveTrue = () =>
+    items.map((item) =>
+      handleConditionAndEdit(item, item.isActive === false, false, true)
+    )
 
   return (
     <Accordion allowToggle w="100%">
-      {itemsCheckFalse.map((item) => (
-        <Item key={item.id} item={item} />
-      ))}
-      {itemsCheckTrue.length > 0 && (
-        <>
-          <Divider m="4rem 0" size="2rem" colorScheme="blue" />
-          <Text fontSize="1.2rem" p=".5rem" color="gray.400">
-            Check
-          </Text>
-          {itemsCheckTrue.map((item) => (
-            <Item key={item.id} item={item} />
-          ))}
-        </>
-      )}
-      {itemsIsActiveFalse.length > 0 && (
-        <>
-          <Divider m="4rem 0" size="2rem" colorScheme="blue" />
-          <Text fontSize="1.2rem" p=".5rem" color="gray.400">
-            Inactivos
-          </Text>
-          {itemsIsActiveFalse.map((item) => (
-            <ItemInactive key={item.id} item={item} />
-          ))}
-        </>
-      )}
+      <ItemListSection
+        items={itemsCheckFalse}
+        title="Not check"
+        btn={
+          <IconButton
+            onClick={handleCheckAll}
+            icon={<Icon as={ImCheckmark} />}
+            fontSize="1.2rem"
+            variant="ghost"
+          />
+        }
+      />
+
+      <Divider m="2rem 0" variant="dashed" />
+
+      <ItemListSection
+        items={itemsCheckTrue}
+        title="Check"
+        btn={
+          <IconButton
+            onClick={handleUnCheckAll}
+            icon={<Icon as={ImCheckmark2} />}
+            fontSize="1.2rem"
+            variant="ghost"
+          />
+        }
+      />
+
+      <Divider m="2rem 0" variant="dashed" />
+
+      <ItemListSection
+        items={itemsIsActiveFalse}
+        title="Inactive"
+        isActive={false}
+        btn={
+          <IconButton
+            onClick={handleIsActiveTrue}
+            icon={<Icon as={ImBackward2} />}
+            fontSize="1.2rem"
+            variant="ghost"
+          />
+        }
+      />
     </Accordion>
   )
 }

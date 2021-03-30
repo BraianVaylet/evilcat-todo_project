@@ -19,7 +19,7 @@ const Key = ({ children, onClick }) => {
 }
 
 Key.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
 }
 
