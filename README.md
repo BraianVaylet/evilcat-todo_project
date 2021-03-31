@@ -1,3 +1,43 @@
+# 🐈 EvilCat
+
+## _ToDo Project in NextJs_ 🖤
+
+I made this project for my own use ... I was tired that every time I went to the supermarket I had to toggle between the list (google keep) and the calculator, so I developed this little ToDo application to calculate the total of the products. .
+
+### Demo: [EvilCat](https://evil-cat-to-do-next-js.vercel.app/Home)
+
+[![evilCat1.jpg](https://i.postimg.cc/59FncjSM/evilCat1.jpg)](https://postimg.cc/XX4wdjP2)
+
+[![evilCat3.jpg](https://i.postimg.cc/k4Ls6d9Z/evilCat3.jpg)](https://postimg.cc/dkmrpphm)
+
+[![evilCat4.jpg](https://i.postimg.cc/wT8F9HwR/evilCat4.jpg)](https://postimg.cc/dD6GBMPJ)
+
+[![evilCat5.jpg](https://i.postimg.cc/G24zmp0G/evilCat5.jpg)](https://postimg.cc/CBVbvSxx)
+
+[![evilCat2.jpg](https://i.postimg.cc/1X6HDY3z/evilCat2.jpg)](https://postimg.cc/p5WzHC8N)
+
+---
+
+### Author
+
+> Braian D. Vaylet
+> Contact: braianvaylet@gmail.com > [linkedin](https://www.linkedin.com/in/braianvaylet/)
+
+### Main libraries used in the project
+
+| library                                               | used                      |
+| ----------------------------------------------------- | ------------------------- |
+| [NextJs](https://nextjs.org/)                         | React framework           |
+| [PropTypes](https://www.npmjs.com/package/prop-types) | Validation                |
+| [Chakra-UI](https://chakra-ui.com/)                   | UI framework              |
+| [Firebase](https://firebase.google.com/?hl=es)        | Authentication & DataBase |
+| [i18next](https://react.i18next.com/)                 | Translations              |
+| [jsDocs](https://jsdoc.app/)                          | documentation             |
+
+### _[Atomic Design](https://atomicdesign.bradfrost.com/)_ is used as a design pattern for the project architecture
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
