@@ -39,8 +39,9 @@ const ItemTemplate = () => {
   const handleContinue = () =>
     title !== "" ? router.push("/Price") : setError("Ingrese un Item")
 
-  const handleEdit = () => {
+  const handleEdit = (saveAndCheck = false) => {
     if (title !== "" && item) {
+      item.check = saveAndCheck || item.check
       handleEditItem(item)
         .then(() => {
           toast({
@@ -106,9 +107,23 @@ const ItemTemplate = () => {
             mb="3rem"
           >
             {isEditing ? (
-              <Button w="100%" p="15px" onClick={handleEdit}>
-                <Text fontSize="20px">{t("ItemTemplate.save")}</Text>
-              </Button>
+              <>
+                <Button w="100%" p="15px" onClick={handleEdit}>
+                  <Text fontSize="20px">{t("ItemTemplate.save")}</Text>
+                </Button>
+                {item.check === false && (
+                  <Button
+                    mt="1rem"
+                    w="100%"
+                    p="15px"
+                    onClick={() => handleEdit(true)}
+                  >
+                    <Text fontSize="20px">
+                      {t("BtnSaveCheck.saveAndCheck")}
+                    </Text>
+                  </Button>
+                )}
+              </>
             ) : (
               <Button w="100%" p="15px" onClick={handleContinue}>
                 <Text fontSize="20px">{t("ItemTemplate.continue")}</Text>

@@ -44,5 +44,12 @@
 	"toasts": {
 		"success": "👍 Success",
 		"error": "👎 Error"
+	},
+	"ResetPrices": {
+		"title": "Reset prices",
+		"success": "👍 All prices were reset"
+	},
+	"BtnSaveCheck": {
+		"saveAndCheck": "Save & Check"
 	}
 }

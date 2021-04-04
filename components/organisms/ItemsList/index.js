@@ -4,9 +4,10 @@ import { ImCheckmark2, ImCheckmark, ImBackward2 } from "react-icons/im"
 import { Divider } from "@chakra-ui/layout"
 import { Accordion } from "@chakra-ui/accordion"
 import Icon from "@chakra-ui/icon"
+import { IconButton } from "@chakra-ui/button"
 // context
 import { FirebaseContext, ItemsContext } from "context"
-import { IconButton } from "@chakra-ui/button"
+// components
 import ItemListSection from "components/molecules/ItemListSection"
 
 /**

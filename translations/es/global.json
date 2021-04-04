@@ -40,5 +40,12 @@
 	"toasts": {
 		"success": "👍 Éxito",
 		"error": "👎 Error"
+	},
+	"ResetPrices": {
+		"title": "Restablecer precios",
+		"success": "👍 Todos los precios se restablecieron"
+	},
+	"BtnSaveCheck": {
+		"saveAndCheck": "Guardar y marcar"
 	}
 }

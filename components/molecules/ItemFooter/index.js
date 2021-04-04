@@ -18,9 +18,11 @@ import Link from "next/link"
 const ItemFooter = ({ item, onClickRemove, removeIcon }) => {
   return (
     <Flex w="100%" align="center" justify="space-between">
-      <Text ml="2rem" fontSize="1.5rem">
-        ${item.price}
-      </Text>
+      <Link href="/Price">
+        <Text ml="2rem" fontSize="1.5rem">
+          ${item.price}
+        </Text>
+      </Link>
       <Flex>
         <Link href="/Item">
           <IconButton

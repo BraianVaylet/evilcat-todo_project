@@ -14,3 +14,8 @@ export const userPropTypes = {
   email: PropTypes.string.isRequired,
   uid: PropTypes.string.isRequired,
 }
+
+export const btnPropTypes = {
+  action: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+}

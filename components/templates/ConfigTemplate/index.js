@@ -6,6 +6,7 @@ import { Divider, Flex } from "@chakra-ui/layout"
 import ChangeLanguageBtn from "components/molecules/ChangeLanguageBtn"
 import ChangeThemeBtn from "components/molecules/ChangeThemeBtn"
 import CustomAvatar from "components/molecules/CustomAvatar"
+import ResetPrices from "components/molecules/ResetPrices"
 // firebase
 import { FirebaseClient } from "firebase/client"
 
@@ -42,12 +43,13 @@ const ConfigTemplate = () => {
           justify="flex-start"
           mt="5rem"
         />
-        <Divider m="3rem 0" />
+        <Divider m="1.5rem 0" />
         <ChangeLanguageBtn />
-        <Divider m="3rem 0" />
+        <Divider m="1.5rem 0" />
         <ChangeThemeBtn />
-
-        <Divider m="3rem 0" />
+        <Divider m="1.5rem 0" />
+        <ResetPrices />
+        <Divider m="1.5rem 0" />
       </Flex>
       <Flex w="100%" mt="3rem" align="center" justify="center">
         <Button fontSize="1.5rem" variant="ghost" onClick={handleLogout}>

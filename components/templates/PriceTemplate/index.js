@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 // ui
 import { Flex, Text } from "@chakra-ui/layout"
-import { Input } from "@chakra-ui/input"
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
 import { Button } from "@chakra-ui/button"
+import { useToast } from "@chakra-ui/toast"
 // containers
 import WrapperItem from "containers/WrapperItem"
 // components
@@ -13,7 +14,6 @@ import Keyboard from "components/molecules/Keyboard"
 import { FirebaseContext, FormContext } from "context"
 // next
 import { useRouter } from "next/router"
-import { useToast } from "@chakra-ui/toast"
 
 /**
  * PriceTemplate Component
@@ -39,27 +39,18 @@ const PriceTemplate = () => {
   const handleContinue = () =>
     price !== "NaN" ? router.push("/Units") : setError("Algo falló")
 
-  const handleEdit = () => {
+  const handleEdit = (saveAndCheck = false) => {
     if (price !== "NaN" && item) {
+      item.check = saveAndCheck || item.check
       handleEditItem(item)
-        .then(() => {
-          toast({
-            title: t("toasts.success"),
-            description: "",
-            status: "success",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
-          router.push("/Home")
-        })
+        .then(() => router.push("/Home"))
         .catch((error) => {
           console.log(`error`, error)
           toast({
             title: t("toasts.error"),
             description: "",
             status: "error",
-            position: "top",
+            position: "bottom",
             duration: 3000,
             isClosable: true,
           })
@@ -86,17 +77,20 @@ const PriceTemplate = () => {
           h="100%"
           p="3rem 1rem"
         >
-          <Input
-            value={price}
-            placeholder="Item"
-            size="lg"
-            fontSize="20px"
-            variant="filled"
-            isDisabled
-            autoFocus={false}
-            isInvalid={error}
-            errorBorderColor="tomato"
-          />
+          <InputGroup size="lg" variant="filled">
+            <InputLeftElement pointerEvents="none" fontSize="30px">
+              $
+            </InputLeftElement>
+            <Input
+              fontSize="30px"
+              value={price}
+              placeholder="Item"
+              isDisabled
+              autoFocus={false}
+              isInvalid={error}
+              errorBorderColor="tomato"
+            />
+          </InputGroup>
           <Keyboard />
           <Flex
             direction="column"
@@ -106,9 +100,23 @@ const PriceTemplate = () => {
             mb="3rem"
           >
             {isEditing ? (
-              <Button w="100%" p="15px" onClick={handleEdit}>
-                <Text fontSize="20px">{t("PriceTemplate.save")}</Text>
-              </Button>
+              <>
+                <Button w="100%" p="15px" onClick={handleEdit}>
+                  <Text fontSize="20px">{t("PriceTemplate.save")}</Text>
+                </Button>
+                {item.check === false && (
+                  <Button
+                    mt="1rem"
+                    w="100%"
+                    p="15px"
+                    onClick={() => handleEdit(true)}
+                  >
+                    <Text fontSize="20px">
+                      {t("BtnSaveCheck.saveAndCheck")}
+                    </Text>
+                  </Button>
+                )}
+              </>
             ) : (
               <Button w="100%" p="15px" onClick={handleContinue}>
                 <Text fontSize="20px">{t("PriceTemplate.continue")}</Text>

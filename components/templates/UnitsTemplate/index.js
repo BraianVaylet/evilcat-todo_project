@@ -43,8 +43,9 @@ const UnitsTemplate = () => {
     }
   }, [units])
 
-  const handleEdit = () => {
+  const handleEdit = (saveAndCheck = false) => {
     if (title !== "" && item) {
+      item.check = saveAndCheck || item.check
       handleEditItem(item)
         .then(() => {
           toast({
@@ -145,6 +146,17 @@ const UnitsTemplate = () => {
             >
               <Text fontSize="20px">{t("UnitsTemplate.save")}</Text>
             </Button>
+
+            {isEditing && item.check === false && (
+              <Button
+                mt="1rem"
+                w="100%"
+                p="15px"
+                onClick={() => handleEdit(true)}
+              >
+                <Text fontSize="20px">{t("BtnSaveCheck.saveAndCheck")}</Text>
+              </Button>
+            )}
 
             {error && (
               <Text color="tomato" fontSize="1rem" mt=".5rem">
