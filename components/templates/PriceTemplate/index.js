@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { Flex, Text } from "@chakra-ui/layout"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
 import { Button } from "@chakra-ui/button"
-import { useToast } from "@chakra-ui/toast"
 // containers
 import WrapperItem from "containers/WrapperItem"
 // components
@@ -23,7 +22,6 @@ import { useRouter } from "next/router"
 const PriceTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
-  const toast = useToast()
   const { item, setItem, price, isEditing } = useContext(FormContext)
   const { handleEditItem } = useContext(FirebaseContext)
   const [error, setError] = useState(null)
@@ -39,27 +37,33 @@ const PriceTemplate = () => {
   const handleContinue = () =>
     price !== "NaN" ? router.push("/Units") : setError("Algo falló")
 
-  const handleEdit = (saveAndCheck = false) => {
+  const handleEditItemAction = (item) =>
+    handleEditItem(item)
+      .then(() => {
+        router.push("/Home")
+      })
+      .catch((error) => {
+        console.log(`error`, error)
+        setError("Algo falló")
+      })
+
+  const handleEdit = () => {
     if (price !== "NaN" && item) {
-      item.check = saveAndCheck || item.check
-      handleEditItem(item)
-        .then(() => router.push("/Home"))
-        .catch((error) => {
-          console.log(`error`, error)
-          toast({
-            title: t("toasts.error"),
-            description: "",
-            status: "error",
-            position: "bottom",
-            duration: 3000,
-            isClosable: true,
-          })
-          setError("Algo falló")
-        })
+      handleEditItemAction(item)
+    } else {
+      setError("Ingrese un precio al item")
+    }
+  }
+
+  const handleEditAndCheck = () => {
+    if (price !== "NaN" && item) {
+      item.check = true
+      handleEditItemAction(item)
     } else {
       setError("Ingrese un titulo al item")
     }
   }
+
   return (
     <WrapperItem title={t("PriceTemplate.title")}>
       <Flex
@@ -109,7 +113,7 @@ const PriceTemplate = () => {
                     mt="1rem"
                     w="100%"
                     p="15px"
-                    onClick={() => handleEdit(true)}
+                    onClick={handleEditAndCheck}
                   >
                     <Text fontSize="20px">
                       {t("BtnSaveCheck.saveAndCheck")}

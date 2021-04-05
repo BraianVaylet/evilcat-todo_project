@@ -43,33 +43,44 @@ const UnitsTemplate = () => {
     }
   }, [units])
 
-  const handleEdit = (saveAndCheck = false) => {
-    if (title !== "" && item) {
-      item.check = saveAndCheck || item.check
-      handleEditItem(item)
-        .then(() => {
-          toast({
-            title: t("toasts.success"),
-            description: "",
-            status: "success",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
-          router.push("/Home")
+  const handleEditItemAction = (item) =>
+    handleEditItem(item)
+      .then(() => {
+        toast({
+          title: t("toasts.success"),
+          description: "",
+          status: "success",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
         })
-        .catch((error) => {
-          console.log(`error`, error)
-          toast({
-            title: t("toasts.error"),
-            description: "",
-            status: "error",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
-          setError("Algo falló")
+        router.push("/Home")
+      })
+      .catch((error) => {
+        console.log(`error`, error)
+        toast({
+          title: t("toasts.error"),
+          description: "",
+          status: "error",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
         })
+        setError("Algo falló")
+      })
+
+  const handleEdit = () => {
+    if (units !== "NaN" && item) {
+      handleEditItemAction(item)
+    } else {
+      setError("Ingrese un titulo al item")
+    }
+  }
+
+  const handleEditAndCheck = () => {
+    if (units !== "NaN" && item) {
+      item.check = true
+      handleEditItemAction(item)
     } else {
       setError("Ingrese un titulo al item")
     }
@@ -84,27 +95,11 @@ const UnitsTemplate = () => {
 
       handleAddItem(_item)
         .then(() => {
-          toast({
-            title: t("toasts.success"),
-            description: "",
-            status: "success",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
           cleanContext()
           router.push("/Home")
         })
         .catch((error) => {
           console.log(`error`, error)
-          toast({
-            title: t("toasts.error"),
-            description: "",
-            status: "error",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
           setError("Algo falló")
         })
     } else {
@@ -148,12 +143,7 @@ const UnitsTemplate = () => {
             </Button>
 
             {isEditing && item.check === false && (
-              <Button
-                mt="1rem"
-                w="100%"
-                p="15px"
-                onClick={() => handleEdit(true)}
-              >
+              <Button mt="1rem" w="100%" p="15px" onClick={handleEditAndCheck}>
                 <Text fontSize="20px">{t("BtnSaveCheck.saveAndCheck")}</Text>
               </Button>
             )}

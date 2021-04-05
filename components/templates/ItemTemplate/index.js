@@ -11,7 +11,6 @@ import WrapperItem from "containers/WrapperItem"
 import { FirebaseContext, FormContext } from "context"
 // next
 import { useRouter } from "next/router"
-import { useToast } from "@chakra-ui/toast"
 
 /**
  * ItemTemplate Component
@@ -21,7 +20,6 @@ import { useToast } from "@chakra-ui/toast"
 const ItemTemplate = () => {
   const [t] = useTranslation("global")
   const router = useRouter()
-  const toast = useToast()
   const { item, setItem, title, setTitle, isEditing } = useContext(FormContext)
   const { handleEditItem } = useContext(FirebaseContext)
   const [error, setError] = useState(null)
@@ -39,33 +37,28 @@ const ItemTemplate = () => {
   const handleContinue = () =>
     title !== "" ? router.push("/Price") : setError("Ingrese un Item")
 
-  const handleEdit = (saveAndCheck = false) => {
+  const handleEditItemAction = (item) =>
+    handleEditItem(item)
+      .then(() => {
+        router.push("/Home")
+      })
+      .catch((error) => {
+        console.log(`error`, error)
+        setError("Algo falló")
+      })
+
+  const handleEdit = () => {
     if (title !== "" && item) {
-      item.check = saveAndCheck || item.check
-      handleEditItem(item)
-        .then(() => {
-          toast({
-            title: t("toasts.success"),
-            description: "",
-            status: "success",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
-          router.push("/Home")
-        })
-        .catch((error) => {
-          console.log(`error`, error)
-          toast({
-            title: t("toasts.error"),
-            description: "",
-            status: "error",
-            position: "top",
-            duration: 3000,
-            isClosable: true,
-          })
-          setError("Algo falló")
-        })
+      handleEditItemAction(item)
+    } else {
+      setError("Ingrese un titulo al item")
+    }
+  }
+
+  const handleEditAndCheck = () => {
+    if (title !== "" && item) {
+      item.check = true
+      handleEditItemAction(item)
     } else {
       setError("Ingrese un titulo al item")
     }
@@ -116,7 +109,7 @@ const ItemTemplate = () => {
                     mt="1rem"
                     w="100%"
                     p="15px"
-                    onClick={() => handleEdit(true)}
+                    onClick={handleEditAndCheck}
                   >
                     <Text fontSize="20px">
                       {t("BtnSaveCheck.saveAndCheck")}
