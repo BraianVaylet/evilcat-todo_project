@@ -17,10 +17,11 @@ import {
 import { ItemPropTypes } from "utils/propTypes"
 // components
 import CustomDrawer from "components/atoms/CustomDrawer"
+import ItemFooter from "components/molecules/ItemFooter"
 // context
 import { FirebaseContext } from "context"
+// hooks
 import useSetColorTheme from "hooks/useSetColorTheme"
-import ItemFooter from "../ItemFooter"
 
 /**
  * Item Component

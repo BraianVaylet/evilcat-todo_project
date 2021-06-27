@@ -9,6 +9,8 @@ import { IconButton } from "@chakra-ui/button"
 import { FirebaseContext, ItemsContext } from "context"
 // components
 import ItemListSection from "components/molecules/ItemListSection"
+import { Flex } from "@chakra-ui/react"
+import { CloseIcon } from "@chakra-ui/icons"
 
 /**
  * ItemsList Component
@@ -59,6 +61,11 @@ const ItemsList = () => {
       handleConditionAndEdit(item, item.isActive === false, false, true)
     )
 
+  const handleRemoveAll = () =>
+    items.map((item) =>
+      handleConditionAndEdit(item, item.isActive === true, false, false)
+    )
+
   return (
     <Accordion allowToggle w="100%">
       <ItemListSection
@@ -80,12 +87,20 @@ const ItemsList = () => {
         items={itemsCheckTrue}
         title="Check"
         btn={
-          <IconButton
-            onClick={handleUnCheckAll}
-            icon={<Icon as={ImCheckmark2} />}
-            fontSize="1.2rem"
-            variant="ghost"
-          />
+          <Flex>
+            <IconButton
+              onClick={handleUnCheckAll}
+              icon={<Icon as={ImCheckmark2} />}
+              fontSize="1.2rem"
+              variant="ghost"
+            />
+            <IconButton
+              onClick={handleRemoveAll}
+              icon={<CloseIcon />}
+              fontSize="1.2rem"
+              variant="ghost"
+            />
+          </Flex>
         }
       />
 

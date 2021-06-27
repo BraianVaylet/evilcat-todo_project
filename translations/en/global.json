@@ -51,5 +51,8 @@
 	},
 	"BtnSaveCheck": {
 		"saveAndCheck": "Save & Check"
+	},
+	"LoaderScreen": {
+		"wait": "Wait"
 	}
 }

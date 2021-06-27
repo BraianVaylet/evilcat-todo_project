@@ -47,5 +47,8 @@
 	},
 	"BtnSaveCheck": {
 		"saveAndCheck": "Guardar y marcar"
+	},
+	"LoaderScreen": {
+		"wait": "Espere"
 	}
 }
