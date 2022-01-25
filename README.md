@@ -1,3 +1,7 @@
+<p align="center" width="200">
+   <img align="center" width="100" src="https://raw.githubusercontent.com/BraianVaylet/EvilCat-ToDo_NextJs/main/public/cat.png" />   
+</p>
+
 # 🐈 EvilCat
 
 ## _ToDo Project in NextJs_ 🖤
